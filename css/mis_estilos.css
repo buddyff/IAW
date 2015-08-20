@@ -1,0 +1,13 @@
+.body-index{
+    background-image:url(../img/pasto_oscuro_20.jpg);
+}
+
+
+.panel-index{
+    opacity:0.7;
+    border-radius:15px;
+}
+
+.btn-login{
+    width: 200px;
+}
