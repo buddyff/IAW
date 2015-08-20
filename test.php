@@ -1,14 +1,11 @@
 <?php
-
 include ("head.php");
-
-
 ?>
 
 <html>
     <body>
         <div class="fluid-container">
-            <div class="page-header">
+            <div class="page-header text-center">
               <h1>Prueba para comprobar que carguen los .js y .css</h1>
             </div>
         </div>
