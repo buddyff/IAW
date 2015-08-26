@@ -8,9 +8,16 @@
 $server = "localhost";
 $user = "root";
 //$pass = "proyecto123";
-$db = "proyecto_iaw";
-$conection = mysql_connect($server, $user);
-mysql_select_db($db,$conection); 
+$nombre_db = "proyecto_iaw";
+if (!$db = mysql_connect($server, $user)){
+    echo "ERROR !";
+    exit;
+}
+
+if(!mysql_select_db($nombre_db,$db)){
+    echo "ERROR 2";
+    exit;
+}
 
 
 
