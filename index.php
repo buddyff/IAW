@@ -6,14 +6,8 @@ include ("config.php");
 
 <html ng-app="app"  >
     <body class="body-index">
-          <div class="container-fluid" ng-view >    
-             
-            
+          <div class="container-fluid" ng-view > 
           </div>        
         
-   </body>
-    
-    
-    
-    
+   </body>    
 </html>
