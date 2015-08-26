@@ -34,7 +34,7 @@ function login($http){
           $http.post("ajax/login_jugador.php", scope.datos)
           .success(function(res){
               if(res)
-              	location.href="/IAW/mi_cuenta";
+              	location.href="#/mi_cuenta";
               else
               	alert ("Error");
             });
