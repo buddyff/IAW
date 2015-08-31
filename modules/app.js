@@ -6,6 +6,8 @@ angular
 
 .controller("registroCtrl",['$http', sign_up])
 	
+.controller("cuentaCtrl",['$http', logout])
+
 .config(function($routeProvider){
         $routeProvider
             .when("/", {
@@ -37,10 +39,8 @@ function login($http){
               	location.href="#/mi_cuenta";
               else
               	alert ("Error");
-            });
-         
-    }; 
-	
+            });         
+    }; 	
 }
 
 function sign_up($http){
@@ -50,16 +50,24 @@ function sign_up($http){
           $http.post("ajax/sign_up.php", scope.datos)
           .success(function(res){
               if(res)
-              	alert ("Todo piola");
+              	location.href="#/mi_cuenta";
               else
               	alert ("Error");
-            });
-         
+            });         
     }; 
-	
-
-
 }
 
+function logout($http){
+	var scope=this;
 	
+	scope.logout = function(){
+          $http.post("ajax/logout.php", scope.datos)
+          .success(function(res){
+              if(res)
+              	location.href="#/";
+              else
+              	alert ("Error");
+            });         
+    }; 
+}	
 
