@@ -16,7 +16,7 @@ angular
             .when("/mi_cuenta", {
                 controller: "cuentaCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/mi_cuenta.html"
+                templateUrl: "injections/mi_cuenta.php"
             })
             .when("/registro", {
                 controller: "registroCtrl",
