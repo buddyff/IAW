@@ -11,3 +11,31 @@
 .btn-login{
     width: 200px;
 }
+
+
+/*************************/
+/*     TABLA TURNOS      */
+/************************/
+#tabla-turnos{
+    font-family: LaceNice;
+}
+
+#tabla-turnos>tbody>tr:nth-child(odd)>td,
+#tabla-turnos>tbody>tr:nth-child(odd)>th {
+   background-color: #48CC39;
+ }
+ 
+#tabla-turnos>tbody>tr:nth-child(even)>td,
+#tabla-turnos>tbody>tr:nth-child(even)>th {
+   background-color: #879985;
+ }
+ 
+/*************************/
+/*      FONTS            */
+/************************/
+
+ 
+@font-face {
+    font-family: LaceNice;
+    src: url(/IAW/fonts/LaceNice.ttf);
+}
