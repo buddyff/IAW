@@ -1,8 +1,6 @@
-
-<!--
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div id="bs-example-navbar-collapse-8" class="collapse navbar-collapse">
-		<div class="container-fluid">
+<div class="col-lg-12">
+   <div class="row">
+        <nav class="navbar navbar-inverse">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#/mi_cuenta">Fulbito</a>
 			</div>
@@ -13,17 +11,11 @@
 				<li><a>Ver Canchas</a></li>
 			</ul>
 			<ul class="pull-right nav navbar-nav >"><li><a>Nombre</a> </li>	</ul>
-		</div>
-	</div>
-</nav>
--->
-
-
-<div ng-repet="t in ctrl.turnos">   
-        <div>{{t}}</div>
+        </nav>
+    </div>
+    <div class="row">
+        <div ng-repeat="t in ctrl.turnos">   
+            <div>{{t}}</div>
+        </div>
+    </div>
 </div>
-
-	
-	
-
-
