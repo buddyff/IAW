@@ -1,3 +1,5 @@
+
+<!--
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div id="bs-example-navbar-collapse-8" class="collapse navbar-collapse">
 		<div class="container-fluid">
@@ -14,18 +16,14 @@
 		</div>
 	</div>
 </nav>
+-->
 
 
-<div>
-	
-	
-	
+<div ng-repet="t in ctrl.turnos">   
+        <div>{{t}}</div>
 </div>
 
+	
+	
 
-<script>
- 
-    
-    
-    
-</script>
+

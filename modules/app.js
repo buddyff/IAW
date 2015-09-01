@@ -6,7 +6,7 @@ angular
 
 .controller("registroCtrl",['$http', sign_up])
 	
-.controller("cuentaCtrl",['$http', logout])
+.controller("cuentaCtrl", ['$http',cuentaCtrl])
 
 .config(function($routeProvider){
         $routeProvider
@@ -70,4 +70,16 @@ function logout($http){
             });         
     }; 
 }	
+
+function cuentaCtrl($http){
+	var scope=this;
+	//scope.turnos=[{a:1},{a:2},{a:3}];
+	
+	$http.post("ajax/get_turnos.php")
+	.success(function(response){
+		scope.turnos= response;	
+	});
+}
+
+
 
