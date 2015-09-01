@@ -12,7 +12,10 @@
     width: 200px;
 }
 
-
+#navbar-ppal{
+    font-family: Caveman;
+    margin-bottom: 100px
+}
 /*************************/
 /*     TABLA TURNOS      */
 /************************/
@@ -38,4 +41,14 @@
 @font-face {
     font-family: LaceNice;
     src: url(/IAW/fonts/LaceNice.ttf);
+}
+
+@font-face {
+    font-family: Rockwell-Bold;
+    src: url(/IAW/fonts/SketchRockwell-Bold.ttf);
+}
+
+@font-face {
+    font-family: Caveman;
+    src: url(/IAW/fonts/CAVEMAN_.TTF);
 }

@@ -1,16 +1,16 @@
 <div class="col-lg-12">
    <div class="row">
-        <nav class="navbar navbar-inverse" style="margin-bottom: 100px">
+        <nav class="navbar navbar-inverse" id="navbar-ppal">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#/mi_cuenta">Fulbito</a>
+				<a class="navbar-brand" href="#/mi_cuenta">FULBITO</a>
 			</div>
 			<ul	class="nav navbar-nav">
-				<li><a>Ver Partidos</a> </li>
-				<li><a>Estad&iacute;sticas</a> </li>
-				<li><a>Amigos</a> </li>
-				<li><a>Ver Canchas</a></li>
+				<li><a>VER PARTIDOS</a> </li>
+				<li><a>ESTAD&Iacute;STICAS</a> </li>
+				<li><a>AMIGOS</a> </li>
+				<li><a>VER CANCHAS</a></li>
 			</ul>
-			<ul class="pull-right nav navbar-nav >"><li><a>Nombre</a> </li>	</ul>
+			<ul class="pull-right nav navbar-nav >"><li><a>NOMBRE</a> </li>	</ul>
         </nav>
     </div>
     <div class="row">
