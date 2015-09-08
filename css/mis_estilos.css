@@ -12,6 +12,11 @@
     width: 200px;
 }
 
+.panel-cancha{
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
 #navbar-ppal{
     font-family: Caveman;
     margin-bottom: 100px

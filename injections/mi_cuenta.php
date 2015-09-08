@@ -5,10 +5,10 @@
 				<a class="navbar-brand" href="#/mi_cuenta">FULBITO</a>
 			</div>
 			<ul	class="nav navbar-nav">
-				<li><a>VER PARTIDOS</a> </li>
+				<li><a href="google.com">VER PARTIDOS</a> </li>
 				<li><a>ESTAD&Iacute;STICAS</a> </li>
 				<li><a>AMIGOS</a> </li>
-				<li><a>VER CANCHAS</a></li>
+				<li><a href="#/cancha">VER CANCHAS</a></li>
 			</ul>
 			<ul class="pull-right nav navbar-nav >"><li><a>NOMBRE</a> </li>	</ul>
         </nav>
