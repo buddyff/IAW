@@ -88,10 +88,39 @@ function cuentaCtrl($http){
 	var scope=this;
 	//scope.turnos=[{a:1},{a:2},{a:3}];
 	
+	
+	
+	//Recupero los turnos en estado Registrando y seteo variables para poder navegar entre turno y turno
 	$http.post("ajax/get_turnos.php")
 	.success(function(response){
+		scope.turno_actual=0;
+		scope.cant_turnos = response.length;
 		scope.turnos= response;	
+<<<<<<< HEAD
 	});		
+=======
+	});
+	
+	scope.siguiente_turno=function(){
+		if (scope.turno_actual==scope.cant_turnos-1)
+			scope.turno_actual=0;
+		else
+			scope.turno_actual=scope.turno_actual+1;
+	};
+	
+	scope.anterior_turno=function(){
+		if (scope.turno_actual==0)
+			scope.turno_actual=scope.cant_turnos-1;
+		else
+			scope.turno_actual=scope.turno_actual-1;
+	};
+	
+	scope.registrar=function (id_turno){
+		console.log("El id del turno es".concat(id_turno));
+		//$http.post("ajax/anotarse_turno.php")
+		
+	};
+>>>>>>> 91de1b695e6379ebe61ec702ad2578890cab54fd
 }
 
 function canchaCtrl($http){

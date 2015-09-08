@@ -1,3 +1,5 @@
+<?php include ("../config.php"); ?>
+
 <div class="col-lg-12">
    <div class="row">
         <nav class="navbar navbar-inverse" id="navbar-ppal">
@@ -10,45 +12,46 @@
 				<li><a>AMIGOS</a> </li>
 				<li><a href="#/cancha">VER CANCHAS</a></li>
 			</ul>
-			<ul class="pull-right nav navbar-nav >"><li><a>NOMBRE</a> </li>	</ul>
+			<ul class="pull-right nav navbar-nav >"><li><a><?php echo strtoupper($_SESSION['user_name']);?> </a> </li>	</ul>
         </nav>
     </div>
+</div>
+<div class="col-lg-4 col-lg-offset-4">
     <div class="row">
-        <table class="table table-striped" id="tabla-turnos" >
-            <thead>
-                <th>Fecha y Hora</th>
-                <th>Cancha</th>
-                <th>Jugador 1</th>
-                <th>Jugador 2</th>
-                <th>Jugador 3</th>
-                <th>Jugador 4</th>
-                <th>Jugador 5</th>
-                <th>Jugador 6</th>
-                <th>Jugador 7</th>
-                <th>Jugador 8</th>
-                <th>Jugador 9</th>
-                <th>Jugador 10</th>
-                <th></th>
-            </thead>
-            <tbody >
-                <tr ng-repeat="t in ctrl.turnos">
-                    
-                    <td scope="row">{{t[13]}}</td> <!--Fecha y hora-->
-                    <td>{{t[16]}}</td> <!--Cancha-->
-                    <td>{{t[2]}}</td>  <!--Jugador 1-->
-                    <td>{{t[3]}}</td>  <!--Jugador 2-->
-                    <td>{{t[4]}}</td>  <!--Jugador 3-->
-                    <td>{{t[5]}}</td>  <!--Jugador 4-->
-                    <td>{{t[6]}}</td>  <!--Jugador 5-->
-                    <td>{{t[7]}}</td>  <!--Jugador 6-->
-                    <td>{{t[8]}}</td>  <!--Jugador 7-->
-                    <td>{{t[9]}}</td>  <!--Jugador 8-->
-                    <td>{{t[10]}}</td> <!--Jugador 9-->
-                    <td>{{t[11]}}</td>  <!--Jugador 10-->
-                    <td><button class="btn-success">Registrar</button></td>
-                </tr>
-            </tbody>
-            
-        </table>
+        <div class="panel panel-success" id="panel-turnos">
+            <div class="panel-heading text-center">
+                <h2>TURNO</h2>
+            </div>
+            <div class="panel-body">
+                <input hidden type="text"></input>
+                <div class="row">
+                    <div class="col-lg-5 text-center">
+                        Cancha  <h2 id="turno_cancha">{{ctrl.turnos[ctrl.turno_actual][17]}}</h1></br>
+                    </div>
+                    <div class="col-lg-7 text-center">
+                        Fecha  <h2 id="turno_fecha">{{ctrl.turnos[ctrl.turno_actual][13]}}</h1></br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3 text-center">
+                        <h3>Hora : {{ctrl.turnos[ctrl.turno_actual][14]}}</h3>
+                    </div>
+                </div>
+              
+            </div>
+            <div class="panel-footer text-center">
+               <button class="btn btn-success">REGISTRARSE</button>
+            </div>
+        </div>
     </div>
+</div>
+<div class="col-lg-4  col-lg-offset-4 text-center">
+    <div class="row">
+        <button type="button" class="btn btn-success" ng-click="ctrl.anterior_turno()">
+            <span aria-hidden="true">&laquo;</span>
+        </button>
+        <button type="button" class="btn btn-success" ng-click="ctrl.siguiente_turno()">
+            <span aria-hidden="true">&raquo;</span>
+         </button>
+     </div>
 </div>

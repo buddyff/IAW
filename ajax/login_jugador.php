@@ -9,8 +9,11 @@ $query = "SELECT * FROM jugadores WHERE Email='{$datos->email}' and Pass='{$dato
 $resultado = mysql_query($query, $db);
 $resultado=  mysql_fetch_assoc($resultado);
 
-if($resultado)
+if($resultado){
+    $_SESSION["user_name"]= $resultado['Nombre'];
+    $_SESSION["user_id"]= $resultado['Id'];     
     echo 1;
+}
 else
     echo 0;
 

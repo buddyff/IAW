@@ -19,13 +19,14 @@
 
 #navbar-ppal{
     font-family: Caveman;
-    margin-bottom: 100px
+    margin-bottom: 130px
 }
 /*************************/
 /*     TABLA TURNOS      */
 /************************/
 #tabla-turnos{
-    font-family: LaceNice;
+    font-family: Simpsons;
+    font-size: 15px;
 }
 
 #tabla-turnos>tbody>tr:nth-child(odd)>td,
@@ -38,10 +39,19 @@
    background-color: #879985;
  }
  
+ 
+ 
+#panel-turnos {
+     font-family: LaceNice;
+    font-size: 15px;
+}
 /*************************/
 /*      FONTS            */
 /************************/
-
+@font-face {
+    font-family: Simpsons;
+    src: url(/IAW/fonts/Simpsonfont.ttf);
+}
  
 @font-face {
     font-family: LaceNice;
@@ -57,3 +67,4 @@
     font-family: Caveman;
     src: url(/IAW/fonts/CAVEMAN_.TTF);
 }
+

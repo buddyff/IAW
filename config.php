@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 
 /***********************************/
 /*        CONEXION A LA DB         */
