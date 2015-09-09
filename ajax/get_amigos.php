@@ -1,7 +1,7 @@
 <?php
 include ("../config.php");
 
-$query = "SELECT id_amigo1 FROM amigos WHERE id_amigo2 = " + $_SESSION['user_id'] + "ORDER ASC";
+$query = "SELECT Nombre, Apellido FROM jugadores INNER JOIN amigos WHERE (amigos.id_amigo1 = jugadores.id OR amigos.id_amigo2 = jugadores.id) AND Nombre != '{$_SESSION['user_name']}'";
 $resultado = mysql_query($query, $db);
 
 $res=array();

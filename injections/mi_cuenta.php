@@ -9,7 +9,7 @@
 			<ul	class="nav navbar-nav">
 				<li><a href="google.com">VER PARTIDOS</a> </li>
 				<li><a>ESTAD&Iacute;STICAS</a> </li>
-				<li><a>AMIGOS</a> </li>
+				<li><a href="#/amigos">AMIGOS</a> </li>
 				<li><a href="#/cancha">VER CANCHAS</a></li>
 			</ul>
 			<ul class="pull-right nav navbar-nav >"><li><a><?php echo strtoupper($_SESSION['user_name']);?> </a> </li>	</ul>

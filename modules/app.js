@@ -96,10 +96,8 @@ function cuentaCtrl($http){
 		scope.turno_actual=0;
 		scope.cant_turnos = response.length;
 		scope.turnos= response;	
-<<<<<<< HEAD
+
 	});		
-=======
-	});
 	
 	scope.siguiente_turno=function(){
 		if (scope.turno_actual==scope.cant_turnos-1)
@@ -120,7 +118,6 @@ function cuentaCtrl($http){
 		//$http.post("ajax/anotarse_turno.php")
 		
 	};
->>>>>>> 91de1b695e6379ebe61ec702ad2578890cab54fd
 }
 
 function canchaCtrl($http){
