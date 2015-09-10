@@ -85,6 +85,7 @@ function cuentaCtrl($http){
 		scope.turnos= response;	
 	});
 	
+	//Funcion para visualizar el siguiente turno
 	scope.siguiente_turno=function(){
 		if (scope.turno_actual==scope.cant_turnos-1)
 			scope.turno_actual=0;
@@ -92,6 +93,7 @@ function cuentaCtrl($http){
 			scope.turno_actual=scope.turno_actual+1;
 	};
 	
+	//Funcion para visualizar el turno anterior
 	scope.anterior_turno=function(){
 		if (scope.turno_actual==0)
 			scope.turno_actual=scope.cant_turnos-1;
@@ -99,10 +101,15 @@ function cuentaCtrl($http){
 			scope.turno_actual=scope.turno_actual-1;
 	};
 	
-	scope.registrar=function (id_turno){
-		console.log("El id del turno es".concat(id_turno));
-		//$http.post("ajax/anotarse_turno.php")
-		
+	
+	scope.registrar=function (){
+		$http.post("ajax/anotarse_turno.php",scope.turnos[scope.turno_actual])
+		.success(function(response){
+			if (response)
+				console.log("se registro ok");
+			else
+				consolo.log("todo mal");
+		});
 	};
 }
 
