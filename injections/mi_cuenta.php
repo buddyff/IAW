@@ -24,7 +24,15 @@
               
             </div>
             <div class="panel-footer text-center">
-               <button class="btn btn-success" ng-click="ctrl.registrar()">REGISTRARSE</button>
+                <div ng-show="ctrl.disponibilidad=='disponible'">
+                     <button class="btn btn-success"  ng-click="ctrl.registrar()">REGISTRAR</button>
+                </div>
+                <div ng-show="ctrl.disponibilidad=='lleno'">
+                     <button class="btn btn-danger" disabled>LLENO</button>
+                </div>
+                <div ng-show="ctrl.disponibilidad=='registrado'">
+                     <button class="btn btn-success" ng-click="ctrl.salir()">SALIR</button>
+                </div>
             </div>
         </div>
     </div>

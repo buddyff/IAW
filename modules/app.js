@@ -95,17 +95,48 @@ function cuentaCtrl($http){
 	.success(function(response){
 		scope.turno_actual=0;
 		scope.cant_turnos = response.length;
-		scope.turnos= response;	
-
-	});		
+		scope.turnos= response;
+		
+		//Verificacion disponibilidad del turno
+		if (scope.turnos[scope.turno_actual][6]<10)
+			scope.disponibilidad ='disponible';
+		else
+			scope.disponibilidad = 'lleno';	
+		
+		//Control si el jugador esta o no registrado al turno
+		scope.is_registered(scope.turnos[scope.turno_actual][0]);
+			
+	});
+	
+	
+	//Funcion para consultar si el jugador esta registrado en el turno
+	scope.is_registered=function(){
+		$http.post("ajax/is_registered.php",scope.turnos[scope.turno_actual][0])
+		.success(function(response){
+			if(response==1)
+				scope.disponibilidad='registrado';	
+		});
+	};		
+	
 	
 	//Funcion para visualizar el siguiente turno
 	scope.siguiente_turno=function(){
+		
 		if (scope.turno_actual==scope.cant_turnos-1)
 			scope.turno_actual=0;
 		else
 			scope.turno_actual=scope.turno_actual+1;
+		
+		//Verificacion de disponibilidad del turno
+		if (scope.turnos[scope.turno_actual][6]<10)
+			scope.disponibilidad ='disponible';
+		else
+			scope.disponibilidad = 'lleno';
+			
+		//Control si el jugador esta o no registrado al turno
+		scope.is_registered(scope.turnos[scope.turno_actual][0]);
 	};
+	
 	
 	//Funcion para visualizar el turno anterior
 	scope.anterior_turno=function(){
@@ -113,16 +144,47 @@ function cuentaCtrl($http){
 			scope.turno_actual=scope.cant_turnos-1;
 		else
 			scope.turno_actual=scope.turno_actual-1;
+		
+		//Verificacion de disponibilidad del turno	
+		if (scope.turnos[scope.turno_actual][6]<10)
+			scope.disponibilidad ='disponible';
+		else
+			scope.disponibilidad = 'lleno';
+			
+		//Control si el jugador esta o no registrado al turno
+		scope.is_registered(scope.turnos[scope.turno_actual][0]);
 	};
 	
-	
+	//Funcion para registrar al jugador en el turno en el que se esta parado actualmente
 	scope.registrar=function (){
-		$http.post("ajax/anotarse_turno.php",scope.turnos[scope.turno_actual])
+		//Hago la peticion Ajax pasansole el Id del turno al cual quiero anotarme
+		$http.post("ajax/anotarse_turno.php",scope.turnos[scope.turno_actual][0])
 		.success(function(response){
 			if (response)
-				console.log("se registro ok");
+				//Verificacion de disponibilidad del turno	
+				if (scope.turnos[scope.turno_actual][6]<10)
+					scope.disponibilidad ='disponible';
+				else
+					scope.disponibilidad = 'lleno';
+				
+				//Control si el jugador esta o no registrado al turno
+				scope.is_registered(scope.turnos[scope.turno_actual][0]);
+		});
+	};
+	
+	//Funcion para desregistrar al jugador en el turno en el que se esta parado actualmente
+	scope.salir=function (){
+		//Hago la peticion Ajax pasansole el Id del turno al cual quiero anotarme
+		$http.post("ajax/salir_turno.php",scope.turnos[scope.turno_actual][0])
+		.success(function(response){
+			//Verificacion de disponibilidad del turno	
+			if (scope.turnos[scope.turno_actual][6]<10)
+				scope.disponibilidad ='disponible';
 			else
-				consolo.log("todo mal");
+				scope.disponibilidad = 'lleno';
+			
+			//Control si el jugador esta o no registrado al turno
+			scope.is_registered(scope.turnos[scope.turno_actual][0]);
 		});
 	};
 }
