@@ -7,7 +7,7 @@
 				<a class="navbar-brand" href="#/mi_cuenta">FULBITO</a>
 			</div>
 			<ul	class="nav navbar-nav">
-				<li><a href=">VER PARTIDOS</a> </li>
+				<li><a href="">VER PARTIDOS</a> </li>
 				<li><a>ESTAD&Iacute;STICAS</a> </li>
 				<li><a href="#/amigos">AMIGOS</a> </li>
 				<li><a href="#/cancha">VER CANCHAS</a></li>
@@ -26,7 +26,7 @@
                 <input hidden type="text"></input>
                 <div class="row">
                     <div class="col-lg-5 text-center">
-                        Cancha  <h2 id="turno_cancha">{{ctrl.turnos[ctrl.turno_actual][7]}}</h1></br>
+                        Cancha  <h2 id="turno_cancha">{{ctrl.turnos[ctrl.turno_actual][8]}}</h1></br>
                     </div>
                     <div class="col-lg-7 text-center">
                         Fecha  <h2 id="turno_fecha">{{ctrl.turnos[ctrl.turno_actual][3]}}</h1></br>
@@ -40,7 +40,15 @@
               
             </div>
             <div class="panel-footer text-center">
-               <button class="btn btn-success" ng-click="ctrl.registrar()">REGISTRARSE</button>
+                <div ng-show="ctrl.disponibilidad=='disponible'">
+                     <button class="btn btn-success"  ng-click="ctrl.registrar()">REGISTRAR</button>
+                </div>
+                <div ng-show="ctrl.disponibilidad=='lleno'">
+                     <button class="btn btn-danger" disabled>LLENO</button>
+                </div>
+                <div ng-show="ctrl.disponibilidad=='registrado'">
+                     <button class="btn btn-success" ng-click="ctrl.salir()">SALIR</button>
+                </div>
             </div>
         </div>
     </div>
