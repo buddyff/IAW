@@ -16,6 +16,7 @@ $query = "INSERT INTO jugadores (Nombre,Apellido,Telefono,Direccion,Edad,Email,P
 
 $resultado = mysql_query($query, $db);
 
+
 if($resultado){
     $_SESSION["user_name"]= $resultado['Nombre'];
     $_SESSION["user_id"]= $resultado['Id'];

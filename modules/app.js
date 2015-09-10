@@ -8,6 +8,10 @@ angular
 	
 .controller("cuentaCtrl", ['$http',cuentaCtrl])
 
+.controller("canchaCtrl", ['$http',canchaCtrl])
+
+.controller("amigosCtrl", ['$http',amigosCtrl])
+
 .config(function($routeProvider){
         $routeProvider
             .when("/", {
@@ -24,6 +28,16 @@ angular
                 controller: "registroCtrl",
                 controllerAs: "ctrl",
                 templateUrl: "injections/registro.html"
+            })
+            .when("/cancha", {
+                controller: "canchaCtrl",
+                controllerAs: "ctrl",
+                templateUrl: "injections/cancha.php"
+            })
+            .when("/amigos", {
+                controller: "amigosCtrl",
+                controllerAs: "ctrl",
+                templateUrl: "injections/amigos.php"
             });
    });
    
@@ -62,10 +76,9 @@ function logout($http){
 	
 	scope.logout = function(){
           $http.post("ajax/logout.php", scope.datos)
-          .success(function(res){
-              if(res)
+          .then(function(res){
               	location.href="#/";
-              else
+          },function(res){
               	alert ("Error");
             });         
     }; 
@@ -83,7 +96,8 @@ function cuentaCtrl($http){
 		scope.turno_actual=0;
 		scope.cant_turnos = response.length;
 		scope.turnos= response;	
-	});
+
+	});		
 	
 	//Funcion para visualizar el siguiente turno
 	scope.siguiente_turno=function(){
@@ -113,5 +127,29 @@ function cuentaCtrl($http){
 	};
 }
 
+function canchaCtrl($http){
+	var scope=this;
+	$http.get("ajax/ver_canchas.php").
+	  then(function(response) {
+	    // this callback will be called asynchronously
+	    // when the response is available
+	    scope.canchas = response.data;
+	  }, function(response) {
+	    // called asynchronously if an error occurs
+	    // or server returns response with an error status.
+	    scope.canchas = "no anda";
+	  }); 
+}
+
+function amigosCtrl($http){
+	var scope = this;
+	
+	$http.get("ajax/get_amigos.php").
+		then(function(response){
+			scope.amigos = response.data;
+		}, function(response){
+			scope.amigos = "No tenes amigos papá!";
+		});	
+}
 
 
