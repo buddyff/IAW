@@ -2,7 +2,7 @@
 include ("../config.php");
 
 //Selecciono los turnos que están en estado Registrando y los ordeno por proximidad de fecha;
-$query = "SELECT * FROM turno t JOIN cancha WHERE estado='Registrando' ORDER BY fecha ASC";
+$query = "SELECT * FROM turnos t JOIN cancha WHERE estado='Registrando' ORDER BY fecha ASC";
 $resultado = mysql_query($query, $db);
 
 $res=array();
