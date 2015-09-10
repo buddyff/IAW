@@ -7,7 +7,7 @@
 				<a class="navbar-brand" href="#/mi_cuenta">FULBITO</a>
 			</div>
 			<ul	class="nav navbar-nav">
-				<li><a href="google.com">VER PARTIDOS</a> </li>
+				<li><a href=">VER PARTIDOS</a> </li>
 				<li><a>ESTAD&Iacute;STICAS</a> </li>
 				<li><a href="#/amigos">AMIGOS</a> </li>
 				<li><a href="#/cancha">VER CANCHAS</a></li>
@@ -26,15 +26,15 @@
                 <input hidden type="text"></input>
                 <div class="row">
                     <div class="col-lg-5 text-center">
-                        Cancha  <h2 id="turno_cancha">{{ctrl.turnos[ctrl.turno_actual][17]}}</h1></br>
+                        Cancha  <h2 id="turno_cancha">{{ctrl.turnos[ctrl.turno_actual][7]}}</h1></br>
                     </div>
                     <div class="col-lg-7 text-center">
-                        Fecha  <h2 id="turno_fecha">{{ctrl.turnos[ctrl.turno_actual][13]}}</h1></br>
+                        Fecha  <h2 id="turno_fecha">{{ctrl.turnos[ctrl.turno_actual][3]}}</h1></br>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3 text-center">
-                        <h3>Hora : {{ctrl.turnos[ctrl.turno_actual][14]}}</h3>
+                        <h3>Hora : {{ctrl.turnos[ctrl.turno_actual][4]}}</h3>
                     </div>
                 </div>
               
