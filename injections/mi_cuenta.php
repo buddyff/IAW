@@ -1,21 +1,5 @@
-<?php include ("../config.php"); ?>
+<?php include ("/navbar.php"); ?>
 
-<div class="col-lg-12">
-   <div class="row">
-        <nav class="navbar navbar-inverse" id="navbar-ppal">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#/mi_cuenta">FULBITO</a>
-			</div>
-			<ul	class="nav navbar-nav">
-				<li><a href=">VER PARTIDOS</a> </li>
-				<li><a>ESTAD&Iacute;STICAS</a> </li>
-				<li><a href="#/amigos">AMIGOS</a> </li>
-				<li><a href="#/cancha">VER CANCHAS</a></li>
-			</ul>
-			<ul class="pull-right nav navbar-nav >"><li><a><?php echo strtoupper($_SESSION['user_name']);?> </a> </li>	</ul>
-        </nav>
-    </div>
-</div>
 <div class="col-lg-4 col-lg-offset-4">
     <div class="row">
         <div class="panel panel-success" id="panel-turnos">
@@ -26,7 +10,7 @@
                 <input hidden type="text"></input>
                 <div class="row">
                     <div class="col-lg-5 text-center">
-                        Cancha  <h2 id="turno_cancha">{{ctrl.turnos[ctrl.turno_actual][7]}}</h1></br>
+                        Cancha  <h2 id="turno_cancha">{{ctrl.turnos[ctrl.turno_actual][8]}}</h1></br>
                     </div>
                     <div class="col-lg-7 text-center">
                         Fecha  <h2 id="turno_fecha">{{ctrl.turnos[ctrl.turno_actual][3]}}</h1></br>
