@@ -15,7 +15,7 @@
 			<ul class="pull-right nav navbar-nav >">
 				<li>
 					<div class="btn-group">
-					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    <?php echo strtoupper($_SESSION['user_name']);?> <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu">
