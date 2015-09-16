@@ -208,25 +208,26 @@ function cuentaCtrl($http){
 
 function canchaCtrl($http){
 	var scope=this;
-	$http.get("ajax/ver_canchas.php").
-	  then(function(response) {
-	    // this callback will be called asynchronously
-	    // when the response is available
-	    scope.canchas = response.data;
-	  }, function(response) {
-	    // called asynchronously if an error occurs
-	    // or server returns response with an error status.
-	    scope.canchas = "no anda";
+	scope.datos={};
+	scope.datos.funcion='ver_canchas';
+	$http.post("ajax/ajaxs.php",scope.datos).
+	  success(function(response) {
+	     if(response)
+	    	scope.canchas = response.data;
+	 	else
+	 	    scope.canchas = "no anda";
 	  }); 
 }
 
 function amigosCtrl($http){
 	var scope = this;
-	
-	$http.get("ajax/get_amigos.php").
-		then(function(response){
-			scope.amigos = response.data;
-		}, function(response){
+	scope.datos={};
+	scope.datos.funcion="get_amigos";
+	$http.post("ajax/ajaxs.php",scope.datos).
+		success(function(response){
+			if(response)
+				scope.amigos = response.data;
+			else
 			scope.amigos = "No tenes amigos papá!";
 		});	
 }
