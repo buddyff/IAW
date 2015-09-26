@@ -12,6 +12,8 @@ angular
 
 .controller("amigosCtrl", ['$http',amigosCtrl])
 
+.controller("historialCtrl", ['$http',historialCtrl])
+
 .config(function($routeProvider){
         $routeProvider
             .when("/", {
@@ -33,6 +35,11 @@ angular
                 controller: "canchaCtrl",
                 controllerAs: "ctrl",
                 templateUrl: "injections/cancha.php"
+            })
+            .when("/historial", {
+                controller: "historialCtrl",
+                controllerAs: "ctrl",
+                templateUrl: "injections/historial.php"
             })
             .when("/amigos", {
                 controller: "amigosCtrl",
@@ -213,10 +220,24 @@ function canchaCtrl($http){
 	$http.post("ajax/ajaxs.php",scope.datos).
 	  success(function(response) {
 	     if(response)
-	    	scope.canchas = response.data;
+	    	scope.canchas = response;
 	 	else
 	 	    scope.canchas = "no anda";
 	  }); 
+}
+
+function historialCtrl($http){
+	var scope=this;
+	scope.datos={};
+	scope.datos.funcion="get_historial";
+	$http.post("ajax/ajaxs.php",scope.datos).
+		success(function(response){
+			if (response)
+				scope.historial=response;
+			else
+				//MOSTRAR ALGO EN ESPECIAL
+				console.log("No hay historial");
+		});
 }
 
 function amigosCtrl($http){
@@ -226,10 +247,11 @@ function amigosCtrl($http){
 	$http.post("ajax/ajaxs.php",scope.datos).
 		success(function(response){
 			if(response)
-				scope.amigos = response.data;
+				scope.amigos = response;
 			else
 			scope.amigos = "No tenes amigos papá!";
 		});	
 }
+
 
 

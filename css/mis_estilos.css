@@ -19,7 +19,7 @@
 
 #navbar-ppal{
     font-family: Caveman;
-    margin-bottom: 130px
+    margin-bottom: 50px
 }
 /*************************/
 /*     TABLA TURNOS      */
@@ -39,12 +39,27 @@
    background-color: #879985;
  }
  
- 
- 
 #panel-turnos {
      font-family: LaceNice;
     font-size: 15px;
 }
+
+ /*************************/
+/*     TABLA HISTORIAL   */
+/************************/
+#tabla_historial{
+  display: -moz-stack;
+  max-height: 250px;
+  overflow-y: scroll;
+  font-family: LaceNice;
+    font-size: 15px;
+}
+
+#panel-historial {
+     font-family: LaceNice;
+    font-size: 15px;
+}
+
 /*************************/
 /*      FONTS            */
 /************************/

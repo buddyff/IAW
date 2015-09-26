@@ -51,7 +51,7 @@ function get_turnos(){
     $db = $GLOBALS['db'];
     
     //Selecciono los turnos que están en estado Registrando y los ordeno por proximidad de fecha;
-    $query = "SELECT * FROM turnos t JOIN cancha WHERE estado='Registrando' ORDER BY fecha ASC";
+    $query = "SELECT * FROM turnos t JOIN canchas WHERE estado='Registrando' ORDER BY fecha ASC";
     $resultado = mysql_query($query, $db);
     
     $res=array();
@@ -166,6 +166,24 @@ function ver_canchas(){
         
         
     
+}
+
+function get_historial(){
+    
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    
+    //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
+    $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
+            WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
+     $resultado = mysql_query($query, $db);
+     $res=array();
+     $aux= mysql_fetch_row($resultado);
+     while($aux){
+       array_push($res,$aux);
+       $aux= mysql_fetch_row($resultado); 
+     }
+     echo json_encode($res);
 }
 
 ?>
