@@ -30,9 +30,10 @@
         <div class="panel-body" >
             <div class="row text-center"  >
                 <h4>Jugados: {{ctrl.historial.length}}</h4>
-                <h4>% Ganado: {{ctrl.estadisticas[0]['Ganados']}}</h4>
-                <h4>% Empatado: {{ctrl.estadisticas[0]['Empatados']}}</h4>
-                <h4>% Perdido: {{ctrl.estadisticas[0]['Perdidos']}}</h4>
+                <h4>Ganados: {{ctrl.estadisticas[0]['Ganados']}}</h4>
+                <h4>Empatados: {{ctrl.estadisticas[0]['Empatados']}}</h4>
+                <h4>Perdidos: {{ctrl.estadisticas[0]['Perdidos']}}</h4>
+                <h4>Efectividad: </h4>
             </div>
          </div>
     </div>

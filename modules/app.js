@@ -21,7 +21,7 @@ angular
             .when("/", {
                 controller: "loginCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/index.html"
+                templateUrl: "injections/index.php"
             })
             .when("/mi_cuenta", {
                 controller: "cuentaCtrl",
@@ -55,19 +55,26 @@ function login($http){
 	
 	scope.datos={};
 	
-	scope.enviar = function(){
-		  scope.datos.funcion="login_jugador";
-          $http.post("ajax/ajaxs.php", scope.datos)
-          .success(function(res){
-              if(res){
-              	location.href="#/mi_cuenta";
-              }
-              else{
-              	
-              	$("#login_incorrecto").modal('toggle');
-              }
-            });         
-    }; 	
+	scope.enviar_jugador = function(){
+	  
+	  scope.datos.funcion="login_jugador";
+      $http.post("ajax/ajaxs.php", scope.datos)
+      .success(function(res){
+          if(res){
+          	location.href="#/mi_cuenta";
+          }
+          else{
+          	
+          	$("#login_incorrecto").modal('toggle');
+          }
+        });         
+    };
+    
+    scope.enviar_cancha=function(){
+    	//CODIGO PARA LOGGEAR CANCHA
+    };
+    
+    	
 }
 
 function sign_up($http){
@@ -104,6 +111,7 @@ function cuentaCtrl($http){
 	var scope=this;
 	scope.datos={};
 	scope.datos.funcion="get_turnos";
+	scope.disponibilidad;
 	//scope.turnos=[{a:1},{a:2},{a:3}];
 		
 	//Recupero los turnos en estado Registrando y seteo variables para poder navegar entre turno y turno
@@ -114,14 +122,15 @@ function cuentaCtrl($http){
 		scope.cant_turnos = response.length;
 		scope.turnos= response;
 		
-		//Verificacion disponibilidad del turno
-		if (scope.turnos[scope.turno_actual]["inscriptos"]<10)
-			scope.disponibilidad ='disponible';
-		else
-			scope.disponibilidad = 'lleno';	
-		
 		//Control si el jugador esta o no registrado al turno
 		scope.is_registered();
+		
+		if(scope.disponibilidad=='disponible')
+			//Verificacion disponibilidad del turno
+			if (scope.turnos[scope.turno_actual]["inscriptos"]>=10)
+				scope.disponibilidad = 'lleno';	
+			
+		
 
 			
 	});
@@ -137,7 +146,7 @@ function cuentaCtrl($http){
 		.success(function(response){
 			if(response==1){
 				scope.disponibilidad='registrado';
-				console.log("entre aca")	;
+				console.log("entre aca");
 			}
 			else
 		 		scope.disponibilidad='disponible';
@@ -153,14 +162,13 @@ function cuentaCtrl($http){
 		else
 			scope.turno_actual=scope.turno_actual+1;
 		
-		//Verificacion de disponibilidad del turno
-		if (scope.turnos[scope.turno_actual]["inscriptos"]<10)
-			scope.disponibilidad ='disponible';
-		else
-			scope.disponibilidad = 'lleno';
-			
 		//Control si el jugador esta o no registrado al turno
 		scope.is_registered();
+		
+		if(scope.disponibilidad=='disponible')
+			//Verificacion disponibilidad del turno
+			if (scope.turnos[scope.turno_actual]["inscriptos"]>=10)
+				scope.disponibilidad = 'lleno';
 	};
 	
 	
@@ -171,14 +179,13 @@ function cuentaCtrl($http){
 		else
 			scope.turno_actual=scope.turno_actual-1;
 		
-		//Verificacion de disponibilidad del turno	
-		if (scope.turnos[scope.turno_actual]["inscriptos"]<10)
-			scope.disponibilidad ='disponible';
-		else
-			scope.disponibilidad = 'lleno';
-			
 		//Control si el jugador esta o no registrado al turno
 		scope.is_registered();
+		
+		if(scope.disponibilidad=='disponible')
+			//Verificacion disponibilidad del turno
+			if (scope.turnos[scope.turno_actual]["inscriptos"]>=10)
+				scope.disponibilidad = 'lleno';
 	};
 	
 	//Funcion para registrar al jugador en el turno en el que se esta parado actualmente
@@ -212,14 +219,13 @@ function cuentaCtrl($http){
 		//Hago la peticion Ajax pasansole el Id del turno al cual quiero anotarme
 		$http.post("ajax/ajaxs.php",scope.datos)
 		.success(function(response){
-			//Verificacion de disponibilidad del turno	
-			if (scope.turnos[scope.turno_actual]["inscriptos"]<10)
-				scope.disponibilidad ='disponible';
-			else
-				scope.disponibilidad = 'lleno';
-			
 			//Control si el jugador esta o no registrado al turno
-			scope.is_registered();
+		scope.is_registered();
+		
+		if(scope.disponibilidad=='disponible')
+			//Verificacion disponibilidad del turno
+			if (scope.turnos[scope.turno_actual]["inscriptos"]>=10)
+				scope.disponibilidad = 'lleno';
 		});
 	};
 	

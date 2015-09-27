@@ -47,7 +47,7 @@ function anotarse_turno(){
     $resultado = mysqli_query($db,$query);
     
     //Registro al jugador en el turno
-    $query="INSERT INTO turnos_jugadores (id_turno,id_jugador) VALUES ({$data->turno},{$_SESSION['user_id']})";
+    $query="INSERT INTO turnos_jugadores (id_turno,id_jugador,resultado) VALUES ({$data->turno},{$_SESSION['user_id']},'null')";
     $resultado = mysqli_query($db,$query);
 }
 
