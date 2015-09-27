@@ -3,12 +3,12 @@
 <div class="row">
     <div class="panel panel-primary col-lg-3 col panel-cancha" ng-repeat="c in ctrl.canchas">
     	<div class="panel-heading text-center">
-    		{{c[1]}}
+    		{{c["nombre"]}}
     	</div>
     	<div class="panel-body">
-    		Telefono: {{c[2]}}
+    		Telefono: {{c["telefono"]}}
     		<br>
-    		Direccion: {{c[4]}} {{c[5]}}, {{c[3]}}
+    		Direccion: {{c["ciudad"]}} {{c["calle"]}}, {{c["calle_numero"]}}
     	</div>
 	</div>    	
 </div>

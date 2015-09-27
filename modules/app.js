@@ -53,7 +53,7 @@ angular
 function login($http){
 	var scope=this;
 	
-	//scope.datos={};
+	scope.datos={};
 	
 	scope.enviar = function(){
 		  scope.datos.funcion="login_jugador";
