@@ -1,5 +1,5 @@
+<?php include("../config.php"); ?>
 
-<div class="col-lg-12">
    <div class="row">
         <nav class="navbar navbar-inverse" id="navbar-ppal">
 			<div class="navbar-header">
@@ -20,7 +20,7 @@
 					  <ul class="dropdown-menu">
 					    <li><a href="#">Action</a></li>
 					    <li role="separator" class="divider"></li>
-					    <li><a href="../IAW">Cerrar Sesion</a></li>
+					    <li><a data-ng-controller="logoutCtrl as c" data-ng-click="c.logout()" >Cerrar Sesion</a></li>
 					  </ul>
 					</div>
 					
@@ -28,4 +28,3 @@
 			</ul>
         </nav>
     </div>
-</div>

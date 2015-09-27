@@ -31,6 +31,9 @@ function login_jugador(){
         echo false;
 }
 
+function logout(){
+    $_SESSION['user_name']=null;
+}
 function anotarse_turno(){
     
     $data = $GLOBALS['data'];
