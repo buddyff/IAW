@@ -59,10 +59,13 @@ function login($http){
 		  scope.datos.funcion="login_jugador";
           $http.post("ajax/ajaxs.php", scope.datos)
           .success(function(res){
-              if(res)
+              if(res){
               	location.href="#/mi_cuenta";
-              else
+              }
+              else{
+              	
               	$("#login_incorrecto").modal('toggle');
+              }
             });         
     }; 	
 }
@@ -121,10 +124,7 @@ function cuentaCtrl($http){
 		
 		//Control si el jugador esta o no registrado al turno
 		scope.is_registered();
-<<<<<<< HEAD
-=======
-		console.log(scope.disponibilidad);
->>>>>>> be3157dcee97a908219f06dc304e32be6e3f25c8
+
 			
 	});
 	

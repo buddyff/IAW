@@ -23,7 +23,11 @@ function login_jugador(){
     	$resultado=  mysqli_fetch_assoc($resultado);
 		$_SESSION["user_name"]= $resultado['Nombre'];
         $_SESSION["user_id"]= $resultado['Id'];     
-        echo true;
+        if($resultado['id']!=null)
+            echo TRUE;
+        else
+            echo false;
+            
     }
     else
         echo false;
