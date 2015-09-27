@@ -25,10 +25,10 @@ function login_jugador(){
     if($resultado){
         $_SESSION["user_name"]= $resultado['Nombre'];
         $_SESSION["user_id"]= $resultado['Id'];     
-        echo 1;
+        echo true;
     }
     else
-        echo 0;
+        echo false;
 }
 
 function anotarse_turno(){

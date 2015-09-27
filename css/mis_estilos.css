@@ -96,3 +96,16 @@
     right:0px;
     margin-bottom:0px;
 }
+
+
+/***********************************/
+/*          MODALES               */
+/*********************************/
+
+.modal-header{
+    background-image:linear-gradient(to bottom, #3c3c3c 0px, #222 100%);
+}
+
+.modal-title{
+    color: white;
+}

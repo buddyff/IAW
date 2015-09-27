@@ -60,7 +60,7 @@ function login($http){
               if(res)
               	location.href="#/mi_cuenta";
               else
-              	alert ("Error");
+              	$("#login_incorrecto").modal('toggle');
             });         
     }; 	
 }

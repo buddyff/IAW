@@ -21,7 +21,7 @@ if(!mysql_select_db($nombre_db,$db)){
 }
 
 
-
+//$_SESSION['user_name']=null;
 
 
 
