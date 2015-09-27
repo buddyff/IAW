@@ -19,11 +19,9 @@ function login_jugador(){
     $db = $GLOBALS['db'];
     
     $query = "SELECT * FROM jugadores WHERE Email='{$data->email}' and Pass='{$data->pass}'";
-    $resultado = mysql_query($query, $db);
-    $resultado=  mysql_fetch_assoc($resultado);
-    
-    if($resultado){
-        $_SESSION["user_name"]= $resultado['Nombre'];
+    if($resultado = mysqli_query($db,$query)){
+    	$resultado=  mysqli_fetch_assoc($resultado);
+		$_SESSION["user_name"]= $resultado['Nombre'];
         $_SESSION["user_id"]= $resultado['Id'];     
         echo 1;
     }
@@ -38,11 +36,11 @@ function anotarse_turno(){
     
     //Aumento en uno la cantidad de inscriptos en el turno
     $query = "UPDATE turnos SET inscriptos=inscriptos+1 WHERE id={$data->turno}";
-    $resultado = mysql_query($query, $db);
+    $resultado = mysqli_query($db,$query);
     
     //Registro al jugador en el turno
     $query="INSERT INTO turnos_jugadores (id_turno,id_jugador) VALUES ({$data->turno},{$_SESSION['user_id']})";
-    $resultado = mysql_query($query, $db);
+    $resultado = mysqli_query($db,$query);
 }
 
 function get_turnos(){
@@ -52,13 +50,11 @@ function get_turnos(){
     
     //Selecciono los turnos que están en estado Registrando y los ordeno por proximidad de fecha;
     $query = "SELECT * FROM turnos t JOIN canchas WHERE estado='Registrando' ORDER BY fecha ASC";
-    $resultado = mysql_query($query, $db);
-    
-    $res=array();
-    $aux= mysql_fetch_row($resultado);
-    while($aux){
-    array_push($res,$aux);
-    $aux= mysql_fetch_row($resultado); 
+   if($resultado = mysqli_query($db,$query)){
+    	$res = array();
+		while($fila = mysqli_fetch_assoc($resultado)){
+    		array_push($res,$fila);
+    	}
     }
     echo json_encode($res);
 }
@@ -70,8 +66,8 @@ function is_registered(){
     
     //Verifico si existe el registro turno-jugador
     $query="SELECT * FROM turnos_jugadores WHERE id_turno={$data->id_turno} AND id_jugador={$_SESSION['user_id']}";
-    $resultado = mysql_query($query, $db);
-    $resultado= mysql_fetch_row($resultado);
+    $resultado = mysqli_query($db,$query);
+    $resultado= mysqli_fetch_row($resultado);
     $resultado=json_encode($resultado);
     
     if($resultado=='false')
@@ -87,11 +83,11 @@ function salir_turno(){
     
     //Decremento en uno la cantidad de inscriptos en el turno
     $query = "UPDATE turnos SET inscriptos=inscriptos-1 WHERE id={$data->turno}";
-    $resultado = mysql_query($query, $db);
+    $resultado = mysqli_query($db,$query);
     
     //Saco el registro del jugador en el turno
     $query="DELETE FROM turnos_jugadores WHERE id_turno={$data->turno} AND id_jugador={$_SESSION['user_id']} ";
-    $resultado = mysql_query($query, $db);
+    $resultado = mysqli_query($db,$query);
     
 }
 
@@ -128,23 +124,21 @@ function get_amigos(){
     $db = $GLOBALS['db'];
     
     $query = "SELECT Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo1 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
-    $resultado = mysql_query($query, $db);
-    
-    $res=array();
-    $aux= mysql_fetch_row($resultado);
-    while($aux){
-        array_push($res,$aux);
-        $aux= mysql_fetch_row($resultado); 
+    if($resultado = mysqli_query($db,$query)){
+    	
+    	$res=array();
+    	while($fila = mysqli_fetch_assoc($resultado)){
+    		array_push($res,$fila);
+    	}
     }
-    
-    $query = "SELECT Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
-    $resultado = mysql_query($query, $db);
-    $aux= mysql_fetch_row($resultado);
-    while($aux){
-        array_push($res,$aux);
-        $aux= mysql_fetch_row($resultado); 
+	 $query = "SELECT Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
+    if($resultado = mysqli_query($db,$query)){
+    	
+    	$res=array();
+    	while($fila = mysqli_fetch_assoc($resultado)){
+    		array_push($res,$fila);
+    	}
     }
-    //for($i=0;$i<count($res);$i++){
      echo json_encode($res);
 }
 
@@ -155,12 +149,11 @@ function ver_canchas(){
     
     $query = "SELECT * FROM canchas ORDER BY nombre ASC";
     
-    $resultado = mysql_query($query, $db);
-    $res = array();
-    $aux = mysql_fetch_row($resultado);
-    while($aux){
-        array_push($res,$aux);
-        $aux = mysql_fetch_row($resultado);
+    if($resultado = mysqli_query($db,$query)){
+    	$res = array();
+		while($fila = mysqli_fetch_assoc($resultado)){
+    		array_push($res,$fila);
+    	}
     }
     echo json_encode($res);          
         
@@ -176,13 +169,12 @@ function get_historial(){
     //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
     $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
             WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
-     $resultado = mysql_query($query, $db);
-     $res=array();
-     $aux= mysql_fetch_row($resultado);
-     while($aux){
-       array_push($res,$aux);
-       $aux= mysql_fetch_row($resultado); 
-     }
+     if($resultado = mysqli_query($db,$query)){
+    	$res = array();
+		while($fila = mysqli_fetch_assoc($resultado)){
+    		array_push($res,$fila);
+    	}
+    }
      echo json_encode($res);
 }
 

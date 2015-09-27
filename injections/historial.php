@@ -12,10 +12,10 @@
                     </tr>
                 </thead>
                 <tbody ng-repeat="c in ctrl.historial">
-                    <th class="text-center"><h4>{{c[0]}}</h4></th>
-                    <th class="text-center"><h4>{{c[1]}}</h4></th>
-                    <th class="text-center"><h4>{{c[2]}}</h4></th>
-                    <th class="text-center"><h4>{{c[3]}}</h4></th>
+                    <th class="text-center"><h4>{{c["nombre"]}}</h4></th>
+                    <th class="text-center"><h4>{{c["fecha"]}}</h4></th>
+                    <th class="text-center"><h4>{{c["horario"]}}</h4></th>
+                    <th class="text-center"><h4>{{c["resultado"]}}</h4></th>
                 </tbody>
             </table>
          </div>
