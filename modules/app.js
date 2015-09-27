@@ -55,19 +55,26 @@ function login($http){
 	
 	scope.datos={};
 	
-	scope.enviar = function(){
-		  scope.datos.funcion="login_jugador";
-          $http.post("ajax/ajaxs.php", scope.datos)
-          .success(function(res){
-              if(res){
-              	location.href="#/mi_cuenta";
-              }
-              else{
-              	
-              	$("#login_incorrecto").modal('toggle');
-              }
-            });         
-    }; 	
+	scope.enviar_jugador = function(){
+	  
+	  scope.datos.funcion="login_jugador";
+      $http.post("ajax/ajaxs.php", scope.datos)
+      .success(function(res){
+          if(res){
+          	location.href="#/mi_cuenta";
+          }
+          else{
+          	
+          	$("#login_incorrecto").modal('toggle');
+          }
+        });         
+    };
+    
+    scope.enviar_cancha=function(){
+    	//CODIGO PARA LOGGEAR CANCHA
+    };
+    
+    	
 }
 
 function sign_up($http){

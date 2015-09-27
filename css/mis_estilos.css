@@ -109,3 +109,11 @@
 .modal-title{
     color: white;
 }
+
+/***********************************/
+/*          SWITCHS               */
+/*********************************/
+
+.bootstrap-switch{
+    height:35px;
+}
