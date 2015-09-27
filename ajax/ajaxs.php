@@ -53,7 +53,8 @@ function get_turnos(){
     $db = $GLOBALS['db'];
     
     //Selecciono los turnos que están en estado Registrando y los ordeno por proximidad de fecha;
-    $query = "SELECT * FROM turnos t JOIN canchas WHERE estado='Registrando' ORDER BY fecha ASC";
+    $query = "SELECT t.id AS id_turno,t.fecha AS fecha,t.horario AS horario,t.inscriptos AS inscriptos,c.nombre AS nombre
+    		 FROM turnos t JOIN canchas c WHERE estado='Registrando' ORDER BY fecha ASC";
    if($resultado = mysqli_query($db,$query)){
     	$res = array();
 		while($fila = mysqli_fetch_assoc($resultado)){
@@ -70,14 +71,16 @@ function is_registered(){
     
     //Verifico si existe el registro turno-jugador
     $query="SELECT * FROM turnos_jugadores WHERE id_turno={$data->id_turno} AND id_jugador={$_SESSION['user_id']}";
-    $resultado = mysqli_query($db,$query);
-    $resultado= mysqli_fetch_row($resultado);
-    $resultado=json_encode($resultado);
+    if($resultado = mysqli_query($db,$query)){
+    	if($fila = mysqli_fetch_row($resultado))
+			echo 1;
+		else 
+			echo 0;
+    }
+    //$fila= mysqli_fetch_row($resultado);
+    //$resultado=json_encode($fila);
     
-    if($resultado=='false')
-        echo 0;
-    else 
-        echo 1;
+    //echo $resultado;
 }
 
 function salir_turno(){
@@ -87,11 +90,13 @@ function salir_turno(){
     
     //Decremento en uno la cantidad de inscriptos en el turno
     $query = "UPDATE turnos SET inscriptos=inscriptos-1 WHERE id={$data->turno}";
-    $resultado = mysqli_query($db,$query);
+    if($resultado = mysqli_query($db,$query)){
+    }
     
     //Saco el registro del jugador en el turno
     $query="DELETE FROM turnos_jugadores WHERE id_turno={$data->turno} AND id_jugador={$_SESSION['user_id']} ";
-    $resultado = mysqli_query($db,$query);
+    if($resultado = mysqli_query($db,$query)){
+    }
     
 }
 

@@ -18,7 +18,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3 text-center">
-                        <h3>Hora : {{ctrl.turnos[ctrl.turno_actual]["hora"]}}</h3>
+                        <h3>Hora : {{ctrl.turnos[ctrl.turno_actual]["horario"]}}</h3>
                     </div>
                 </div>
               
