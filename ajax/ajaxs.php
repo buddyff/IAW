@@ -81,10 +81,21 @@ function is_registered(){
 		else 
 			echo 0;
     }
-    //$fila= mysqli_fetch_row($resultado);
-    //$resultado=json_encode($fila);
+}
+
+function is_user_registered(){
     
-    //echo $resultado;
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    
+    //Verifico si existe el registro turno-jugador
+    $query="SELECT * FROM turnos_jugadores WHERE id_turno={$data->id_turno} AND id_jugador={$data->id_amigo}";
+    if($resultado = mysqli_query($db,$query)){
+    	if($fila = mysqli_fetch_row($resultado))
+			echo 1;
+		else 
+			echo 0;
+    }
 }
 
 function salir_turno(){
@@ -132,11 +143,9 @@ function sign_up(){
 }
 
 function get_amigos(){
-
-    $data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
     
-    $query = "SELECT Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo1 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
+    $query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo1 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
     if($resultado = mysqli_query($db,$query)){
     	
     	$res=array();
@@ -144,7 +153,7 @@ function get_amigos(){
     		array_push($res,$fila);
     	}
     }
-	 $query = "SELECT Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
+	 $query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
     if($resultado = mysqli_query($db,$query)){
     	
     	$res=array();
@@ -168,10 +177,7 @@ function ver_canchas(){
     		array_push($res,$fila);
     	}
     }
-    echo json_encode($res);          
-        
-        
-    
+    echo json_encode($res); 
 }
 
 function get_historial(){ 
@@ -190,7 +196,6 @@ function get_historial(){
     }
     
     echo json_encode($res);
-     
      
 }
 
@@ -221,6 +226,19 @@ function get_estadisticas(){
     $res=array();
     array_push($res,array('Ganados'=>$ganados,'Empatados'=>$empatados,'Perdidos'=>$perdidos));
     echo json_encode($res); 
+}
+
+function invitar(){	
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+	
+	$query = "INSERT INTO invitaciones (id_invitador,id_invitado,id_turno) VALUES ('{$_SESSION['user_id']}','{$data->id_invitado}','{$data->id_turno}')";
+    
+    if($resultado = mysqli_query($db,$query)){
+    	echo 1;
+	}
+	else
+		echo 0;
 }
 
 ?>

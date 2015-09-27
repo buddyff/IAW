@@ -105,9 +105,7 @@ function cuentaCtrl($http){
 	scope.datos={};
 	scope.datos.funcion="get_turnos";
 	//scope.turnos=[{a:1},{a:2},{a:3}];
-	
-	
-	
+		
 	//Recupero los turnos en estado Registrando y seteo variables para poder navegar entre turno y turno
 	$http.post("ajax/ajaxs.php",scope.datos)
 	.success(function(response){
@@ -137,7 +135,6 @@ function cuentaCtrl($http){
 		
 		$http.post("ajax/ajaxs.php",scope.datos)
 		.success(function(response){
-			console.log(response);
 			if(response==1){
 				scope.disponibilidad='registrado';
 				console.log("entre aca")	;
@@ -225,8 +222,54 @@ function cuentaCtrl($http){
 			scope.is_registered();
 		});
 	};
+	
+	scope.invitar_amigos=function(){
+		scope.datos = {};
+		scope.datos.funcion = "get_amigos";
+		$http.post("ajax/ajaxs.php",scope.datos).
+		success(function(response){
+			scope.amigos = response;
+			scope.registrado = new Array();
+			for(i=0;i<scope.amigos.length;i++){
+				scope.data = {};
+				scope.data.funcion = "is_user_registered";
+				scope.data.id_amigo = scope.amigos[i]["Id"];
+				scope.data.id_turno = scope.turnos[scope.turno_actual]["id_turno"];
+				$http.post("ajax/ajaxs.php",scope.data)				
+				.success(function(response){
+					if(response==1){
+						scope.registrado[scope.data.id_amigo]='si';
+					}
+					else{
+						if(scope.registrado[scope.data.id_amigo]!='invitado'){
+				 			scope.registrado[scope.data.id_amigo]='no';
+				 			console.log("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡cambie!!!!!!!!!!!!!!!!!!!!!!!!");
+				 		}
+					}
+				});
+			}
+		});
+		$("#invitar_amigos").modal('toggle');
+	};
+	
+	scope.invitar=function(id_invitado){
+		scope.datos = {};
+		scope.datos.id_invitado = id_invitado;
+		scope.datos.id_turno = scope.turnos[scope.turno_actual]["id_turno"];
+		console.log(id_invitado);
+		console.log(scope.turnos[scope.turno_actual]["id"]);
+		scope.datos.funcion = "invitar";
+		console.log("Por hacer post invitar");
+		$http.post("ajax/ajaxs.php",scope.datos).
+		success(function(response){
+			scope.registrado[id_invitado] = 'invitado';
+		});
+	};
 }
 
+//----------------------------------------------------------------
+//--------------------Controlador cancha-------------------------
+//---------------------------------------------------------------
 function canchaCtrl($http){
 	var scope=this;
 	scope.datos={};
