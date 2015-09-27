@@ -23,12 +23,15 @@ function login_jugador(){
     	$resultado=  mysqli_fetch_assoc($resultado);
 		$_SESSION["user_name"]= $resultado['Nombre'];
         $_SESSION["user_id"]= $resultado['Id'];     
-        echo 1;
+        echo true;
     }
     else
-        echo 0;
+        echo false;
 }
 
+function logout(){
+    $_SESSION['user_name']=null;
+}
 function anotarse_turno(){
     
     $data = $GLOBALS['data'];

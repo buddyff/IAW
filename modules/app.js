@@ -2,6 +2,8 @@ angular
 
 .module("app",['ngRoute'])
 
+.controller("logoutCtrl",['$http',logoutCtrl])
+
 .controller("loginCtrl",['$http', login])
 
 .controller("registroCtrl",['$http', sign_up])
@@ -60,7 +62,7 @@ function login($http){
               if(res)
               	location.href="#/mi_cuenta";
               else
-              	alert ("Error");
+              	$("#login_incorrecto").modal('toggle');
             });         
     }; 	
 }
@@ -80,18 +82,18 @@ function sign_up($http){
     }; 
 }
 
-function logout($http){
-	var scope=this;
-	
+function logoutCtrl($http){
+	var scope = this;
+	scope.datos={};
+	scope.datos.funcion='logout';
 	scope.logout = function(){
-          $http.post("ajax/logout.php", scope.datos)
-          .then(function(res){
+          $http.post("ajax/ajaxs.php",scope.datos)
+          .success(function(response){
               	location.href="#/";
-          },function(res){
-              	alert ("Error");
-            });         
-    }; 
-}	
+          		});
+          	};     
+}
+	
 
 function cuentaCtrl($http){
 	var scope=this;

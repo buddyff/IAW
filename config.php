@@ -29,7 +29,7 @@ if (mysqli_connect_errno()) {
 }
 
 
-
+//$_SESSION['user_name']=null;
 
 
 
