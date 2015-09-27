@@ -6,8 +6,7 @@
 				<a class="navbar-brand" href="#/mi_cuenta">FULBITO</a>
 			</div>
 			<ul	class="nav navbar-nav">
-				<li><a href="#/historial">VER HISTORIAL</a> </li>
-				<li><a>ESTAD&Iacute;STICAS</a> </li>
+				<li><a href="#/historial">HISTORIAL/ESTADISTICAS</a> </li>
 				<li><a href="#/amigos">AMIGOS</a> </li>
 				<li><a href="#/cancha">VER CANCHAS</a></li>
 			</ul>

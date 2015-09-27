@@ -34,6 +34,7 @@ function login_jugador(){
 function logout(){
     $_SESSION['user_name']=null;
 }
+
 function anotarse_turno(){
     
     $data = $GLOBALS['data'];
@@ -171,11 +172,13 @@ function ver_canchas(){
     
 }
 
-function get_historial(){
+function get_historial(){ 
     
     $data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
-    
+    $ganados=0;
+    $empatados=0;
+    $perdidos=0;
     //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
     $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
             WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
