@@ -21,7 +21,7 @@ angular
             .when("/", {
                 controller: "loginCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/index.html"
+                templateUrl: "injections/index.php"
             })
             .when("/mi_cuenta", {
                 controller: "cuentaCtrl",

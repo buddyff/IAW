@@ -1,7 +1,6 @@
 <?php
 include ("head.php");
 include ("config.php");
-include ("Modales/login_incorrecto.php");
 ?>
 <script src="modules/app.js"></script>
 
