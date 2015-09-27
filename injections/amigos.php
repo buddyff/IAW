@@ -1,5 +1,3 @@
-<?php include ("/navbar.php"); ?>
-
 <div class="row">
     <div class="panel panel-primary col-lg-3 col panel-cancha" ng-repeat="c in ctrl.amigos">
     	<div class="panel-heading text-center">

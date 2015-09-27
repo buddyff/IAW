@@ -1,5 +1,5 @@
-<?php include ("../config.php"); ?>
 
+<div class="col-lg-12">
    <div class="row">
         <nav class="navbar navbar-inverse" id="navbar-ppal">
 			<div class="navbar-header">
@@ -28,3 +28,4 @@
 			</ul>
         </nav>
     </div>
+</div>

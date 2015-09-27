@@ -40,8 +40,9 @@
  }
  
 #panel-turnos {
-     font-family: LaceNice;
+    font-family: LaceNice;
     font-size: 15px;
+    margin-top: 35px;
 }
 
  /*************************/
@@ -58,6 +59,7 @@
 #panel-historial {
      font-family: LaceNice;
     font-size: 15px;
+    margin-top: 35px;
 }
 
 /*************************/
@@ -83,3 +85,14 @@
     src: url(/IAW/fonts/CAVEMAN_.TTF);
 }
 
+/***********************************/
+/*          FOOTER                */
+/*********************************/
+#footer {
+    position:fixed;
+    height:50px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin-bottom:0px;
+}

@@ -1,5 +1,3 @@
-<?php include ("/navbar.php"); ?>
-
 <div class="col-lg-6 col-lg-offset-3">
     <div class="panel panel-success" id="panel-historial">
         <div class="panel-heading text-center" ><h2>HISTORIAL</h2></div>

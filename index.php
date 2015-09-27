@@ -6,8 +6,10 @@ include ("config.php");
 
 <html ng-app="app"  >
     <body class="body-index">
+            <?php include ("injections/navbar.php"); ?>
+             
           <div class="container-fluid" ng-view > 
           </div>        
-        
+           <?php include ("injections/footer.php");?>
    </body>    
 </html>
