@@ -169,19 +169,49 @@ function get_historial(){
     
     $data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
-    $ganados=0;
-    $empatados=0;
-    $perdidos=0;
+    
     //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
     $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
             WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
      if($resultado = mysqli_query($db,$query)){
     	$res = array();
 		while($fila = mysqli_fetch_assoc($resultado)){
-    		array_push($res,$fila);
+          array_push($res,$fila);
     	}
     }
-     echo json_encode($res);
+    
+    echo json_encode($res);
+     
+     
+}
+
+function get_estadisticas(){
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    $ganados=0;
+    $empatados=0;
+    $perdidos=0;
+    //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
+    $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
+            WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
+    if($resultado = mysqli_query($db,$query)){
+        while($fila = mysqli_fetch_assoc($resultado)){
+            switch($fila['resultado']){
+                case 'Gano':{
+                    $ganados++;break;
+                }
+                case 'Empato': {
+                    $empatados++;break;
+                }
+                case'Perdio' :{
+                    $perdidos++;break;
+                }
+            }
+         }
+    }
+    $res=array();
+    array_push($res,array('Ganados'=>$ganados,'Empatados'=>$empatados,'Perdidos'=>$perdidos));
+    echo json_encode($res); 
 }
 
 ?>

@@ -118,7 +118,7 @@ function cuentaCtrl($http){
 			scope.disponibilidad = 'lleno';	
 		
 		//Control si el jugador esta o no registrado al turno
-		scope.is_registered(scope.turnos[scope.turno_actual][0]);
+		scope.is_registered();
 			
 	});
 	
@@ -231,15 +231,27 @@ function canchaCtrl($http){
 function historialCtrl($http){
 	var scope=this;
 	scope.datos={};
-	scope.datos.funcion="get_historial";
+	scope.datos2={};
+	scope.datos.funcion="get_estadisticas";
 	$http.post("ajax/ajaxs.php",scope.datos).
 		success(function(response){
 			if (response)
-				scope.historial=response;
-			else
-				//MOSTRAR ALGO EN ESPECIAL
-				console.log("No hay historial");
+				scope.estadisticas=response;
+			
 		});
+		
+	
+	scope.datos2.funcion="get_historial";
+	
+	$http.post("ajax/ajaxs.php",scope.datos2).
+		success(function(response){
+			if (response){
+				scope.historial=response;
+			}
+			
+		});
+		
+	
 }
 
 function amigosCtrl($http){

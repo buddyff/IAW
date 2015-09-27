@@ -27,12 +27,12 @@
 <div class="col-lg-4">
     <div class="panel panel-success" id="panel-historial">
         <div class="panel-heading text-center" ><h2>ESTADÍSTICAS</h2></div>
-        <div class="panel-body">
-            <div class="row text-center">
+        <div class="panel-body" >
+            <div class="row text-center"  >
                 <h4>Jugados: {{ctrl.historial.length}}</h4>
-                <h4>% Ganado:</h4>
-                <h4>% Empatado:</h4>
-                <h4>% Perdido:</h4>
+                <h4>% Ganado: {{ctrl.estadisticas[0]['Ganados']}}</h4>
+                <h4>% Empatado: {{ctrl.estadisticas[0]['Empatados']}}</h4>
+                <h4>% Perdido: {{ctrl.estadisticas[0]['Perdidos']}}</h4>
             </div>
          </div>
     </div>
