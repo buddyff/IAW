@@ -8,7 +8,7 @@
     	<div class="panel-body">
     		Telefono: {{c["telefono"]}}
     		<br>
-    		Direccion: {{c["ciudad"]}} {{c["calle"]}}, {{c["calle_numero"]}}
+    		Direccion: {{c["ciudad"]}}, {{c["calle"]}} {{c["calle_numero"]}}
     	</div>
 	</div>    	
 </div>
