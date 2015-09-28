@@ -87,15 +87,17 @@ function is_user_registered(){
     
     $data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
-    
+    $res = array();
+    array_push($res,$data->id_amigo);
     //Verifico si existe el registro turno-jugador
     $query="SELECT * FROM turnos_jugadores WHERE id_turno={$data->id_turno} AND id_jugador={$data->id_amigo}";
     if($resultado = mysqli_query($db,$query)){
     	if($fila = mysqli_fetch_row($resultado))
-			echo 1;
+			array_push($res,true);
 		else 
-			echo 0;
+			array_push($res,false);
     }
+    echo json_encode($res);
 }
 
 function salir_turno(){
@@ -143,20 +145,18 @@ function sign_up(){
 }
 
 function get_amigos(){
-    $db = $GLOBALS['db'];
+    $db = $GLOBALS['db'];    	
+	$res=array();
     
     $query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo1 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
     if($resultado = mysqli_query($db,$query)){
-    	
-    	$res=array();
     	while($fila = mysqli_fetch_assoc($resultado)){
     		array_push($res,$fila);
     	}
     }
-	 $query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
+	
+	$query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
     if($resultado = mysqli_query($db,$query)){
-    	
-    	$res=array();
     	while($fila = mysqli_fetch_assoc($resultado)){
     		array_push($res,$fila);
     	}

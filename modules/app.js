@@ -112,6 +112,7 @@ function cuentaCtrl($http){
 	scope.datos={};
 	scope.datos.funcion="get_turnos";
 	scope.disponibilidad;
+	scope.registrado = new Array();
 	//scope.turnos=[{a:1},{a:2},{a:3}];
 		
 	//Recupero los turnos en estado Registrando y seteo variables para poder navegar entre turno y turno
@@ -141,12 +142,11 @@ function cuentaCtrl($http){
 		scope.datos={};
 		scope.datos.funcion="is_registered";
 		scope.datos.id_turno=scope.turnos[scope.turno_actual]["id_turno"];
-		
+		console.log(scope.datos.id_turno);
 		$http.post("ajax/ajaxs.php",scope.datos)
 		.success(function(response){
 			if(response==1){
 				scope.disponibilidad='registrado';
-				console.log("entre aca");
 			}
 			else
 		 		scope.disponibilidad='disponible';
@@ -235,7 +235,6 @@ function cuentaCtrl($http){
 		$http.post("ajax/ajaxs.php",scope.datos).
 		success(function(response){
 			scope.amigos = response;
-			scope.registrado = new Array();
 			for(i=0;i<scope.amigos.length;i++){
 				scope.data = {};
 				scope.data.funcion = "is_user_registered";
@@ -243,18 +242,20 @@ function cuentaCtrl($http){
 				scope.data.id_turno = scope.turnos[scope.turno_actual]["id_turno"];
 				$http.post("ajax/ajaxs.php",scope.data)				
 				.success(function(response){
-					if(response==1){
-						scope.registrado[scope.data.id_amigo]='si';
+					if(response[1]){
+						scope.registrado[response[0]]='si';
 					}
 					else{
-						if(scope.registrado[scope.data.id_amigo]!='invitado'){
-				 			scope.registrado[scope.data.id_amigo]='no';
-				 			console.log("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡cambie!!!!!!!!!!!!!!!!!!!!!!!!");
+						console.log("ID AMIGO: ");
+						console.log(response[0]);
+						if(scope.registrado[response[0]]!='invitado'){
+				 			scope.registrado[response[0]]='no';
 				 		}
 					}
 				});
 			}
 		});
+		console.log(scope.registrado);
 		$("#invitar_amigos").modal('toggle');
 	};
 	
@@ -262,10 +263,7 @@ function cuentaCtrl($http){
 		scope.datos = {};
 		scope.datos.id_invitado = id_invitado;
 		scope.datos.id_turno = scope.turnos[scope.turno_actual]["id_turno"];
-		console.log(id_invitado);
-		console.log(scope.turnos[scope.turno_actual]["id"]);
 		scope.datos.funcion = "invitar";
-		console.log("Por hacer post invitar");
 		$http.post("ajax/ajaxs.php",scope.datos).
 		success(function(response){
 			scope.registrado[id_invitado] = 'invitado';
