@@ -71,7 +71,7 @@ function login($http){
     };
     
     scope.enviar_cancha=function(){
-    	//CODIGO PARA LOGGEAR CANCHA
+    	console.log("se ejecuto el de la cancha");
     };
     
     	
