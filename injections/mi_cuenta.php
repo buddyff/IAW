@@ -1,4 +1,7 @@
-<?php include ("navbar.php");?>
+<?php 
+	include ("navbar.php");
+	include ("../Modales/invitar_amigos.php");
+?>
 
 <div class="col-lg-4 col-lg-offset-4">
     <div class="row">
@@ -32,6 +35,9 @@
                 </div>
                 <div ng-show="ctrl.disponibilidad=='registrado'">
                      <button class="btn btn-success" ng-click="ctrl.salir()">SALIR</button>
+                </div>
+                <div>
+                	<button class="btn" ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
                 </div>
             </div>
         </div>

@@ -112,10 +112,9 @@ function cuentaCtrl($http){
 	scope.datos={};
 	scope.datos.funcion="get_turnos";
 	scope.disponibilidad;
+	scope.registrado = new Array();
 	//scope.turnos=[{a:1},{a:2},{a:3}];
-	
-	
-	
+		
 	//Recupero los turnos en estado Registrando y seteo variables para poder navegar entre turno y turno
 	$http.post("ajax/ajaxs.php",scope.datos)
 	.success(function(response){
@@ -143,13 +142,11 @@ function cuentaCtrl($http){
 		scope.datos={};
 		scope.datos.funcion="is_registered";
 		scope.datos.id_turno=scope.turnos[scope.turno_actual]["id_turno"];
-		
+		console.log(scope.datos.id_turno);
 		$http.post("ajax/ajaxs.php",scope.datos)
 		.success(function(response){
-			console.log(response);
 			if(response==1){
 				scope.disponibilidad='registrado';
-				console.log("entre aca");
 			}
 			else
 		 		scope.disponibilidad='disponible';
@@ -231,8 +228,52 @@ function cuentaCtrl($http){
 				scope.disponibilidad = 'lleno';
 		});
 	};
+	
+	scope.invitar_amigos=function(){
+		scope.datos = {};
+		scope.datos.funcion = "get_amigos";
+		$http.post("ajax/ajaxs.php",scope.datos).
+		success(function(response){
+			scope.amigos = response;
+			for(i=0;i<scope.amigos.length;i++){
+				scope.data = {};
+				scope.data.funcion = "is_user_registered";
+				scope.data.id_amigo = scope.amigos[i]["Id"];
+				scope.data.id_turno = scope.turnos[scope.turno_actual]["id_turno"];
+				$http.post("ajax/ajaxs.php",scope.data)				
+				.success(function(response){
+					if(response[1]){
+						scope.registrado[response[0]]='si';
+					}
+					else{
+						console.log("ID AMIGO: ");
+						console.log(response[0]);
+						if(scope.registrado[response[0]]!='invitado'){
+				 			scope.registrado[response[0]]='no';
+				 		}
+					}
+				});
+			}
+		});
+		console.log(scope.registrado);
+		$("#invitar_amigos").modal('toggle');
+	};
+	
+	scope.invitar=function(id_invitado){
+		scope.datos = {};
+		scope.datos.id_invitado = id_invitado;
+		scope.datos.id_turno = scope.turnos[scope.turno_actual]["id_turno"];
+		scope.datos.funcion = "invitar";
+		$http.post("ajax/ajaxs.php",scope.datos).
+		success(function(response){
+			scope.registrado[id_invitado] = 'invitado';
+		});
+	};
 }
 
+//----------------------------------------------------------------
+//--------------------Controlador cancha-------------------------
+//---------------------------------------------------------------
 function canchaCtrl($http){
 	var scope=this;
 	scope.datos={};
