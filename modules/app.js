@@ -121,8 +121,14 @@ function cuentaCtrl($http){
 		
 		scope.turno_actual=0;
 		scope.cant_turnos = response.length;
+		
 		scope.turnos= response;
 		
+		for(i = 0 ; i < scope.cant_turnos ; i++){
+			scope.registrado[scope.turnos[i]["id_turno"]] = new Array();
+			
+			console.log("Creo arreglo " + i);
+		}
 		//Control si el jugador esta o no registrado al turno
 		scope.is_registered();
 		
@@ -130,10 +136,6 @@ function cuentaCtrl($http){
 			//Verificacion disponibilidad del turno
 			if (scope.turnos[scope.turno_actual]["inscriptos"]>=10)
 				scope.disponibilidad = 'lleno';	
-			
-		
-
-			
 	});
 	
 	
@@ -142,7 +144,6 @@ function cuentaCtrl($http){
 		scope.datos={};
 		scope.datos.funcion="is_registered";
 		scope.datos.id_turno=scope.turnos[scope.turno_actual]["id_turno"];
-		console.log(scope.datos.id_turno);
 		$http.post("ajax/ajaxs.php",scope.datos)
 		.success(function(response){
 			if(response==1){
@@ -241,21 +242,31 @@ function cuentaCtrl($http){
 				scope.data.id_amigo = scope.amigos[i]["Id"];
 				scope.data.id_turno = scope.turnos[scope.turno_actual]["id_turno"];
 				$http.post("ajax/ajaxs.php",scope.data)				
-				.success(function(response){
-					if(response[1]){
-						scope.registrado[response[0]]='si';
+				.success(function(response){//response trae en la componente 0 id_usario, en 1 el id_turno y en 2 si el usuario esta registrado al turno.
+					console.log("id usuario "+response[0]);
+					console.log("id turno "+response[1]);
+					console.log(scope.registrado[response[1]][response[0]]);					
+					if(response[2]){
+						scope.registrado[response[1]][response[0]]='si';
 					}
 					else{
-						console.log("ID AMIGO: ");
-						console.log(response[0]);
-						if(scope.registrado[response[0]]!='invitado'){
-				 			scope.registrado[response[0]]='no';
-				 		}
+						scope.consulta = {};
+						scope.consulta.funcion = "esta_invitado";
+						scope.consulta.id_amigo = response[0];
+						scope.consulta.id_turno = response[1];
+						$http.post("ajax/ajaxs.php",scope.consulta)				
+						.success(function(response){
+							if(response[2]){
+								scope.registrado[response[1]][response[0]]='invitado';
+								console.log(scope.registrado[response[1]][response[0]]);
+							}
+							else
+								scope.registrado[response[1]][response[0]]='no';
+						});
 					}
 				});
 			}
 		});
-		console.log(scope.registrado);
 		$("#invitar_amigos").modal('toggle');
 	};
 	
@@ -266,7 +277,7 @@ function cuentaCtrl($http){
 		scope.datos.funcion = "invitar";
 		$http.post("ajax/ajaxs.php",scope.datos).
 		success(function(response){
-			scope.registrado[id_invitado] = 'invitado';
+			scope.registrado[scope.data.id_turno][id_invitado] = 'invitado';
 		});
 	};
 }

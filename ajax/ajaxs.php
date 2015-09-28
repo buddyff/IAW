@@ -49,6 +49,13 @@ function anotarse_turno(){
     //Registro al jugador en el turno
     $query="INSERT INTO turnos_jugadores (id_turno,id_jugador,resultado) VALUES ({$data->turno},{$_SESSION['user_id']},'null')";
     $resultado = mysqli_query($db,$query);
+
+    $query="SELECT id FROM invitaciones WHERE id_invitado = {$_SESSION['user_id']}";
+    $resultado = mysqli_query($db,$query);
+    if($fila = mysqli_fetch_row($resultado)){
+        $query = "DELETE FROM invitaciones WHERE id_invitado = {$_SESSION['user_id']}";
+        mysqli_query($db,$query);
+    }
 }
 
 function get_turnos(){
@@ -89,6 +96,7 @@ function is_user_registered(){
     $db = $GLOBALS['db'];
     $res = array();
     array_push($res,$data->id_amigo);
+	array_push($res,$data->id_turno);
     //Verifico si existe el registro turno-jugador
     $query="SELECT * FROM turnos_jugadores WHERE id_turno={$data->id_turno} AND id_jugador={$data->id_amigo}";
     if($resultado = mysqli_query($db,$query)){
@@ -96,6 +104,24 @@ function is_user_registered(){
 			array_push($res,true);
 		else 
 			array_push($res,false);
+    }
+    echo json_encode($res);
+}
+
+function esta_invitado(){
+    
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    $res = array();
+    array_push($res,$data->id_amigo);
+    array_push($res,$data->id_turno);
+    //Verifico si existe el registro turno-jugador
+    $query="SELECT * FROM invitaciones WHERE id_turno={$data->id_turno} AND id_invitado={$data->id_amigo}";
+    if($resultado = mysqli_query($db,$query)){
+        if($fila = mysqli_fetch_row($resultado))
+            array_push($res,true);
+        else 
+            array_push($res,false);
     }
     echo json_encode($res);
 }
