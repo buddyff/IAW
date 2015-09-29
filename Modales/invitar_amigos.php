@@ -10,9 +10,9 @@
 	           		<tbody ng-repeat="a in ctrl.amigos">
 	           			<tr>
 			                <th><p>{{a["Nombre"]}} {{a["Apellido"]}}</p></th>
-			                <th ng-show="ctrl.registrado[a['Id']] == 'no'"><button class="btn btn-success" ng-click="ctrl.invitar(a['Id'])">Invitar</button></th>
-			                <th ng-show="ctrl.registrado[a['Id']] == 'si'"><button class="btn">Registrado</button></th>
-			                <th ng-show="ctrl.registrado[a['Id']] == 'invitado'"><button class="btn">Invitado</button></th>
+			                <th ng-show="ctrl.registrado[ctrl.turnos[ctrl.turno_actual]['id_turno']][a['Id']] == 'no'"><button class="btn btn-success" ng-click="ctrl.invitar(a['Id'])">Invitar</button></th>
+			                <th ng-show="ctrl.registrado[ctrl.turnos[ctrl.turno_actual]['id_turno']][a['Id']] == 'si'"><button class="btn">Registrado</button></th>
+			                <th ng-show="ctrl.registrado[ctrl.turnos[ctrl.turno_actual]['id_turno']][a['Id']] == 'invitado'"><button class="btn">Invitado</button></th>
 		                </tr>
 	                </tbody>
 	            </table>
