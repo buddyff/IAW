@@ -1,7 +1,7 @@
 <?php include("../config.php"); ?>
 
    <div class="row">
-        <nav class="navbar navbar-inverse" id="navbar-ppal" >
+        <nav class="navbar navbar-inverse" id="navbar-ppal-jugador" >
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#/inicio_jugador">FULBITO</a>
 			</div>

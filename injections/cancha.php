@@ -1,4 +1,4 @@
-<?php include ("navbar.php");?>
+<?php include ("navbar_jugador.php");?>
 
 <div class="row">
     <div class="panel panel-primary col-lg-3 col panel-cancha" ng-repeat="c in ctrl.canchas">
