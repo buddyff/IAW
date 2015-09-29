@@ -1,4 +1,4 @@
-<?php include ("navbar.php");?>
+<?php include ("navbar_jugador.php");?>
 
 <div class="col-lg-6 col-lg-offset-1">
     <div class="panel panel-success" id="panel-historial">
