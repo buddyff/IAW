@@ -14,7 +14,7 @@
 				<li>
 					<div class="btn-group">
 					  <button type="button"  id="navbar-btn" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					     <?php echo strtoupper($_SESSION['user_name']); ?><span class="caret"></span>
+					     <?php echo strtoupper($_SESSION['user_name']); ?><span id="notify" class="badge"></span>
 					  </button>
 					  <ul class="dropdown-menu">
 					    <li><a href="#">Action</a></li>
@@ -23,7 +23,35 @@
 					  </ul>
 					</div>
 					
-					 </li>	
+					 </li>
+					 <p id="p"></p>	
 			</ul>
         </nav>
     </div>
+<script>
+	$(document).ready(function(){
+			//var intervalo = setInterval('f1()',1000);
+		var datos = {};
+		datos.funcion = "cantidad_invitaciones";
+		$.post("ajax/ajax_sin_angular.php",datos).
+		success(function(response){
+			$('#notify').html(response);
+		});	
+		
+		alertify.log("Esto es una notificación cualquiera."); 
+		alertify.log("Esto es una notificación cualquiera."); 
+			
+	});
+
+	function f1(){
+			
+		var datos = {};
+		datos.funcion = "cantidad_invitaciones";
+		$http.post("ajax/ajaxs.php",datos).
+		success(function(response){
+			$('#notify').html(response);
+		});	
+		
+		alertify.log("Esto es una notificación cualquiera."); 
+	}
+</script>    

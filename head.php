@@ -9,7 +9,9 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular-route.js"></script>
+    <script type="text/javascript" src="js/alertify.js"></script>    
     
-    
-    
+    <link rel="stylesheet" type="text/css" href="css/alertify.core.css" />
+    <link rel="stylesheet" type="text/css" href="css/alertify.default.css" />
+    <link rel="stylesheet" type="text/css" href="css/alertify.bootstrap.css" />
 </head>

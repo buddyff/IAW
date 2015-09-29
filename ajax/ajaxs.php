@@ -147,6 +147,20 @@ function esta_invitado(){
     echo json_encode($res);
 }
 
+function cantidad_invitaciones(){
+    
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    $cantidad = 0;
+    //Verifico si existe el registro turno-jugador
+    $query="SELECT * FROM invitaciones WHERE id_invitado={$_SESSION['user_id']} AND vista=0";
+    if($resultado = mysqli_query($db,$query)){
+        while($fila = mysqli_fetch_row($resultado))
+            $cantidad++;
+    }
+    echo $cantidad;
+}
+
 function salir_turno(){
     
     $data = $GLOBALS['data'];
