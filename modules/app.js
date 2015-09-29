@@ -23,10 +23,10 @@ angular
                 controllerAs: "ctrl",
                 templateUrl: "injections/index.php"
             })
-            .when("/mi_cuenta", {
+            .when("/inicio_jugador", {
                 controller: "cuentaCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/mi_cuenta.php"
+                templateUrl: "injections/inicio_jugador.php"
             })
             .when("/registro", {
                 controller: "registroCtrl",
@@ -52,29 +52,44 @@ angular
    
 function login($http){
 	var scope=this;
-	
 	scope.datos={};
-	
+	scope.nombre;
+   
 	scope.enviar_jugador = function(){
 	  
 	  scope.datos.funcion="login_jugador";
       $http.post("ajax/ajaxs.php", scope.datos)
       .success(function(res){
+          console.log(scope.nombre);
           if(res){
-          	location.href="#/mi_cuenta";
+          	scope.nombre="res['Nombre']";
+          	location.href="#/inicio_jugador";
+          	
           }
           else{
-          	
           	$("#login_incorrecto").modal('toggle');
           }
-        });         
+        });   
+         
     };
+    
     
     scope.enviar_cancha=function(){
-    	console.log("se ejecuto el de la cancha");
+    	
+    	scope.datos.funcion="login_cancha";
+    	$http.post("ajax/ajaxs.php", scope.datos)
+    	.success(function(res){
+    		if(res){
+					location.href="#/inicio_jugador";
+					$("#navbar-btn").text("Cancha");
+    		}
+    		else{
+    			$("#login_incorrecto").modal('toggle');
+    		}
+    	});
     };
     
-    	
+    
 }
 
 function sign_up($http){
@@ -110,6 +125,7 @@ function logoutCtrl($http){
 function cuentaCtrl($http){
 	var scope=this;
 	scope.datos={};
+	
 	scope.datos.funcion="get_turnos";
 	scope.disponibilidad;
 	scope.registrado = new Array();

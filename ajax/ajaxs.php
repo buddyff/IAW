@@ -23,6 +23,27 @@ function login_jugador(){
     	$resultado=  mysqli_fetch_assoc($resultado);
 		$_SESSION["user_name"]= $resultado['Nombre'];
         $_SESSION["user_id"]= $resultado['Id'];     
+        if($resultado['Id']!=null)
+            echo $resultado['Nombre'];
+        else
+            echo false;
+            
+    }
+    else
+        echo false;
+}
+
+
+function login_cancha(){
+    
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    
+    $query = "SELECT * FROM canchas WHERE email='{$data->email}' and pass='{$data->pass}'";
+    if($resultado = mysqli_query($db,$query)){
+        $resultado=  mysqli_fetch_assoc($resultado);
+        $_SESSION["user_name"]= $resultado['nombre'];
+        $_SESSION["user_id"]= $resultado['id'];     
         if($resultado['id']!=null)
             echo TRUE;
         else
