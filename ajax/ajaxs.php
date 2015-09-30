@@ -245,12 +245,12 @@ function get_historial(){
     
     $data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
+    $res = array();
     
     //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
     $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
             WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
      if($resultado = mysqli_query($db,$query)){
-    	$res = array();
 		while($fila = mysqli_fetch_assoc($resultado)){
           array_push($res,$fila);
     	}

@@ -1,5 +1,5 @@
 <?php 
-	include ("navbar.php");
+	include ("navbar_jugador.php");
 	include ("../Modales/invitar_amigos.php");
 ?>
 

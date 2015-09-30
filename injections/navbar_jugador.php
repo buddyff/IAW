@@ -37,9 +37,17 @@
 		success(function(response){
 			$('#notify').html(response);
 		});	
+
+		datos.funcion = "mostrar_invitaciones";
+		$.post("ajax/ajax_sin_angular.php",datos).
+		success(function(response){
+			console.log(response);
+			var invitaciones = JSON.parse(response);
+			for (var i = invitaciones.length - 1; i >= 0; i--) {
+				alertify.log(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " te invito a jugar en " + invitaciones[i]["nombre_cancha"]);
+			};
+		});	
 		
-		alertify.log("Esto es una notificación cualquiera."); 
-		alertify.log("Esto es una notificación cualquiera."); 
 			
 	});
 
