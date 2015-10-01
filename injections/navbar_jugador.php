@@ -44,10 +44,9 @@
 			console.log(response);
 			var invitaciones = JSON.parse(response);
 			for (var i = invitaciones.length - 1; i >= 0; i--) {
-				alertify.log(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " te invito a jugar en " + invitaciones[i]["nombre_cancha"]);
+				alertify.log(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " te invito a '<a href=javascript:aceptar_invitacion("+invitaciones[i]['id_invitacion']+")>Jugar</a>'  en " + invitaciones[i]["nombre_cancha"]);
 			};
-		});	
-		
+		});			
 			
 	});
 
@@ -61,5 +60,11 @@
 		});	
 		
 		alertify.log("Esto es una notificación cualquiera."); 
+	}
+
+	function aceptar_invitacion(id_invitacion){
+		var datos = {};
+		datos.funcion = "aceptar_invitacion";
+		console.log(id_invitacion);
 	}
 </script>    
