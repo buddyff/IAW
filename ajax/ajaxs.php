@@ -133,7 +133,7 @@ function status_turno(){
         if($fila = mysqli_fetch_row($resultado))
             echo 1;
         else{
-            $query="SELECT * inscriptos FROM turnos WHERE id={$data->id_turno}";
+            $query="SELECT inscriptos FROM turnos WHERE id={$data->id_turno}";
             $resultado=mysqli_query($db,$query);
             $resultado=mysqli_fetch_assoc($resultado);
             if($resultado['inscriptos']==10)

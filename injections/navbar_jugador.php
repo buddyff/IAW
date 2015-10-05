@@ -29,14 +29,8 @@
         </nav>
     </div>
 <script>
-<<<<<<< HEAD
+
     $(document).ready(function(){
-        
-        
-    });
-</script>
-=======
-	$(document).ready(function(){
 			//var intervalo = setInterval('f1()',1000);
 		var datos = {};
 		datos.funcion = "cantidad_invitaciones";
@@ -75,4 +69,4 @@
 		console.log(id_invitacion);
 	}
 </script>    
->>>>>>> 49b3c1445a66f3420511f9987981e993948202f7
+
