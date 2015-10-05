@@ -195,6 +195,20 @@ function esta_invitado(){
     echo json_encode($res);
 }
 
+function cantidad_invitaciones(){
+    
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    $cantidad = 0;
+    //Verifico si existe el registro turno-jugador
+    $query="SELECT * FROM invitaciones WHERE id_invitado={$_SESSION['user_id']} AND vista=0";
+    if($resultado = mysqli_query($db,$query)){
+        while($fila = mysqli_fetch_row($resultado))
+            $cantidad++;
+    }
+    echo $cantidad;
+}
+
 function salir_turno(){
     
     $data = $GLOBALS['data'];
@@ -279,12 +293,12 @@ function get_historial(){
     
     $data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
+    $res = array();
     
     //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
     $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
             WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
      if($resultado = mysqli_query($db,$query)){
-    	$res = array();
 		while($fila = mysqli_fetch_assoc($resultado)){
           array_push($res,$fila);
     	}

@@ -37,7 +37,7 @@
                      <button class="btn btn-success" ng-click="ctrl.salir()">SALIR</button>
                 </div>
                 <div>
-                	<button class="btn" ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
+                	<button class="btn " ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
                 </div>
             </div>
         </div>
