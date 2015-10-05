@@ -1,13 +1,11 @@
 <?php 
-	include ("navbar_jugador.php");
-	include ("../Modales/invitar_amigos.php");
+    include ("navbar_cancha.php");
 ?>
-
 <div class="col-lg-4 col-lg-offset-4">
     <div class="row">
         <div class="panel panel-success" id="panel-turnos">
             <div class="panel-heading text-center">
-                <h2>TURNO {{ctrl.disponibilidad}}</h2>
+                <h2>JUGANDOSE !</h2>
             </div>
             <div class="panel-body">
                 <input hidden type="text"></input>
@@ -37,20 +35,9 @@
                      <button class="btn btn-success" ng-click="ctrl.salir()">SALIR</button>
                 </div>
                 <div>
-                	<button class="btn" ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
+                    <button class="btn" ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="col-lg-4  col-lg-offset-4 text-center">
-    <div class="row">
-        <button type="button" class="btn btn-success" ng-click="ctrl.anterior_turno()">
-            <span aria-hidden="true">&laquo;</span>
-        </button>
-        <button type="button" class="btn btn-success" ng-click="ctrl.siguiente_turno()">
-            <span aria-hidden="true">&raquo;</span>
-         </button>
-     </div>
-</div>
-

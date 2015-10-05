@@ -1,6 +1,7 @@
 <?php
 include ("../config.php");
 
+
 //Obtencion de los datos
 $data = json_decode(file_get_contents("php://input"));
 
@@ -32,7 +33,6 @@ function login_jugador(){
     else
         echo false;
 }
-
 
 function login_cancha(){
     
@@ -77,6 +77,33 @@ function anotarse_turno(){
         $query = "DELETE FROM invitaciones WHERE id_invitado = {$_SESSION['user_id']}";
         mysqli_query($db,$query);
     }
+    
+    //Si se lleno el turno armo los equipos
+    $query="SELECT inscriptos FROM turnos WHERE id={$data->turno}";
+    $resultado = mysqli_query($db,$query);
+    $fila = mysqli_fetch_assoc($resultado);
+    if ($fila['inscriptos']==10){
+        $query="SELECT j.id,puntaje 
+                FROM jugadores j JOIN turnos_jugadores tj ON (j.id=tj.id_jugador) 
+                WHERE tj.id_turno={$data->turno} ORDER BY puntaje desc";
+        $resultado = mysqli_query($db,$query);
+        for($i=0;$i<5;$i++){
+            
+            $id_jugador_1=mysqli_fetch_assoc($resultado);
+            $id_jugador_1=$id_jugador_1['id'];
+            
+            $id_jugador_2=mysqli_fetch_assoc($resultado);
+            $id_jugador_2=$id_jugador_2['id'];
+            
+            $query="UPDATE turnos_jugadores SET equipo=0 WHERE id_jugador={$id_jugador_1}";
+            mysqli_query($db,$query);
+            $query="UPDATE turnos_jugadores SET equipo=1 WHERE id_jugador={$id_jugador_2}";
+            mysqli_query($db,$query);
+        }
+        
+    }
+        
+    
 }
 
 function get_turnos(){
@@ -94,6 +121,27 @@ function get_turnos(){
     	}
     }
     echo json_encode($res);
+}
+
+function status_turno(){
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    
+    //Verifico si existe el registro turno-jugador
+    $query="SELECT * FROM turnos_jugadores WHERE id_turno={$data->id_turno} AND id_jugador={$_SESSION['user_id']}";
+    if($resultado = mysqli_query($db,$query)){
+        if($fila = mysqli_fetch_row($resultado))
+            echo 1;
+        else{
+            $query="SELECT * inscriptos FROM turnos WHERE id={$data->id_turno}";
+            $resultado=mysqli_query($db,$query);
+            $resultado=mysqli_fetch_assoc($resultado);
+            if($resultado['inscriptos']==10)
+                   echo 2;  
+            else
+                echo 3;
+        }
+    }
 }
 
 function is_registered(){

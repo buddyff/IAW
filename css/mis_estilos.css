@@ -17,7 +17,12 @@
 	margin-left: 5px;
 }
 
-#navbar-ppal{
+#navbar-ppal-jugador{
+    font-family: Caveman;
+    margin-bottom: 50px
+}
+
+#navbar-ppal-cancha{
     font-family: Caveman;
     margin-bottom: 50px
 }
