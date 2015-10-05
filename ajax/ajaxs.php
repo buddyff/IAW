@@ -350,4 +350,27 @@ function invitar(){
 		echo 0;
 }
 
+function get_turno_actual(){
+    
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db']; 
+    $res = array();
+    $query="SELECT j.nombre,t.horario FROM turnos t JOIN turnos_jugadores tj ON (t.id=tj.id_turno) JOIN jugadores j ON (j.id=tj.id_jugador)
+            WHERE t.id_cancha={$_SESSION['user_id']} AND t.estado='Jugando' AND fecha=CURRENT_DATE AND TIMEDIFF(CURRENT_TIME,t.horario)<='01:00:00' 
+            ORDER BY equipo DESC";
+     if($resultado = mysqli_query($db,$query)){
+        while($fila = mysqli_fetch_assoc($resultado)){
+          array_push($res,$fila);
+        }
+        echo json_encode($res);
+     }
+    
+}
+    
+    
+    
+    
+    
+
+
 ?>

@@ -290,6 +290,29 @@ function cuentaJugadorCtrl($http){
 function cuentaCanchaCtrl($http){
 	var scope=this;
 	scope.datos={};
+	scope.datos.funcion='get_turno_actual';
+	
+	//Obtengo la informacion del turno que se esta jugando ahora
+	$http.post("ajax/ajaxs.php",scope.datos)
+	.success(function(response){
+		if(response.length>0){
+			scope.hay_turno=true;
+			scope.j_11 = response[0]['nombre'];
+			scope.j_12 = response[1]['nombre'];
+			scope.j_13 = response[2]['nombre'];
+			scope.j_14 = response[3]['nombre'];
+			scope.j_15 = response[4]['nombre'];
+			scope.j_21 = response[5]['nombre'];
+			scope.j_22 = response[6]['nombre'];
+			scope.j_23 = response[7]['nombre'];
+			scope.j_24 = response[8]['nombre'];
+			scope.j_25 = response[9]['nombre'];
+			scope.horario =response[0]['horario'];
+		}
+		else
+			scope.hay_turno=false;
+	});
+	
 }
 
 

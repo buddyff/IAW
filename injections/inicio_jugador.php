@@ -7,7 +7,7 @@
     <div class="row">
         <div class="panel panel-success" id="panel-turnos">
             <div class="panel-heading text-center">
-                <h2>TURNO {{ctrl.disponibilidad}}</h2>
+                <h2>TURNO</h2>
             </div>
             <div class="panel-body">
                 <input hidden type="text"></input>

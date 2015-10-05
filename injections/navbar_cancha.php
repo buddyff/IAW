@@ -7,6 +7,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="#/crear_turno">CREAR TURNO</a> </li>
+                <li><a href="#/cargar_resultados">CARGAR RESULTADOS</a> </li>
                 <li><a href="#/ver_calendario">VER CALENDARIO</a> </li>
                
             </ul>
