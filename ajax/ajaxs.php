@@ -350,9 +350,10 @@ function invitar(){
 		echo 0;
 }
 
+
+//Devuelve el turno que se esta jugando actualmente para la cancha loggeada
 function get_turno_actual(){
     
-    $data = $GLOBALS['data'];
     $db = $GLOBALS['db']; 
     $res = array();
     $query="SELECT j.nombre,t.horario FROM turnos t JOIN turnos_jugadores tj ON (t.id=tj.id_turno) JOIN jugadores j ON (j.id=tj.id_jugador)
@@ -366,9 +367,110 @@ function get_turno_actual(){
      }
     
 }
+
+//Devuelve todo los turnos que encuentran en estado Finalizado
+function get_turnos_cargar(){
     
+    $db = $GLOBALS['db'];
+    $res = array();
+    $query="SELECT t.id FROM turnos t  WHERE  t.estado='Finalizado' ORDER BY fecha ASC";
+   if($resultado = mysqli_query($db,$query)){
+        while($fila = mysqli_fetch_assoc($resultado)){
+          array_push($res,$fila);
+        }
+        echo json_encode($res);
+     }         
+}    
+
+
+function get_info_turno (){
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
+    $res = array();
+    $query="SELECT j.id,j.nombre,t.horario,t.fecha FROM turnos t JOIN turnos_jugadores tj ON (t.id=tj.id_turno) JOIN jugadores j ON (j.id=tj.id_jugador)
+            WHERE  t.id={$data->turno} ORDER BY equipo ASC";
+     if($resultado = mysqli_query($db,$query)){
+        while($fila = mysqli_fetch_assoc($resultado)){
+          array_push($res,$fila);
+        }
+        echo json_encode($res);
+     }
+}
+
+function cargar_resultado(){
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
     
+    //Obtengo los datos
+    $id_turno = $data->id_turno;
+    $res_0 = $data->resultado_0;
+    $res_1=$data->resultado_1;
+    $gano_0=false;
+    $gano_1=false;
+    $empate=false;
+   
+    //Determino que equipo gano
+    if ($res_0 > $res_1) $gano_0=true;
+    else
+        if ($res_0 < $res_1) 
+            $gano_1=true;
+        else 
+            $empate=true;
     
+    //Actualizo la tabla turnos_jugadores 
+    if($gano_0){
+        $query = "UPDATE turnos_jugadores SET resultado='Gano' WHERE id_turno={$id_turno} AND equipo=0";
+        mysqli_query($db,$query);
+        $query = "UPDATE turnos_jugadores SET resultado='Perdio' WHERE id_turno={$id_turno} AND equipo=1";
+        mysqli_query($db,$query);
+    }
+    else
+        if($gano_1){
+             $query = "UPDATE turnos_jugadores SET resultado='Perdio' WHERE id_turno={$id_turno} AND equipo=0";
+            mysqli_query($db,$query);
+            $query = "UPDATE turnos_jugadores SET resultado='Gano' WHERE id_turno={$id_turno} AND equipo=1";
+            mysqli_query($db,$query);
+        }
+        else {
+            $query = "UPDATE turnos_jugadores SET resultado='Empato' WHERE id_turno={$id_turno}";
+            mysqli_query($db,$query);
+            
+        }
+     
+     //Actualizo los puntajes de los jugadores
+     if($gano_0){
+         $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=0";
+         $resultado=mysqli_query($db,$query);
+         while($fila = mysqli_fetch_assoc($resultado)){
+           $id_jugador= $fila['id_jugador'];
+           $query="UPDATE jugadores SET Puntaje=Puntaje+3 WHERE id={$id_jugador}";
+           mysqli_query($db,$query);
+        }
+     }
+     else
+         if($gano_1){
+              $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=1";
+             $resultado=mysqli_query($db,$query);
+             while($fila = mysqli_fetch_assoc($resultado)){
+               $id_jugador= $fila['id_jugador'];
+               $query="UPDATE jugadores SET Puntaje=Puntaje+3 WHERE id={$id_jugador}";
+               mysqli_query($db,$query);
+            }
+         }
+          else{
+             $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=0";
+             $resultado=mysqli_query($db,$query);
+             while($fila = mysqli_fetch_assoc($resultado)){
+               $id_jugador= $fila['id_jugador'];
+               $query="UPDATE jugadores SET Puntaje=Puntaje+3 WHERE id={$id_jugador}";
+               mysqli_query($db,$query);
+            }
+        }
+        
+       //Actualizo el estado del turno a CERRADO
+       $query="UPDATE turnos SET estado='Cerrado' WHERE id={$id_turno}";
+       mysqli_query($db,$query);
+}      
     
     
 
