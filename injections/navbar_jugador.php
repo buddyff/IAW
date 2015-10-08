@@ -44,8 +44,13 @@
 		success(function(response){
 			console.log(response);
 			var invitaciones = JSON.parse(response);
+
 			for (var i = invitaciones.length - 1; i >= 0; i--) {
-				alertify.log(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " te invito a '<a href=javascript:aceptar_invitacion("+invitaciones[i]['id_invitacion']+")>Jugar</a>'  en " + invitaciones[i]["nombre_cancha"]);
+				var params = invitaciones[i]["nombre_cancha"]+","+invitaciones[i]['id_invitacion']+","+invitaciones[i]['dia']+","+invitaciones[i]['hora'];
+			console.log("ESTOS SON OS PARAMETROS " + params);
+				 alertify.notify(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " <a href=javascript:aceptar_invitacion("+String(params)+")>te invito a jugar</a>  en " + invitaciones[i]["nombre_cancha"]
+				 	, 'custom', 55);
+				//alertify.log(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " te invito a '<a href=javascript:aceptar_invitacion("+invitaciones[i]['id_invitacion']+")>Jugar</a>'  en " + invitaciones[i]["nombre_cancha"]);
 			};
 		});			
 			
@@ -60,13 +65,24 @@
 			$('#notify').html(response);
 		});	
 		
-		alertify.log("Esto es una notificación cualquiera."); 
 	}
 
-	function aceptar_invitacion(id_invitacion){
+	function aceptar_invitacion(cancha,id_invitacion,dia,hora){
 		var datos = {};
-		datos.funcion = "aceptar_invitacion";
-		console.log(id_invitacion);
+		console.log("A confirmar");
+		alertify.confirm("Confimar invitacion","Jugas el "+dia+" a las "+hora+" en "+cancha ,
+		function(){
+			datos.funcion = "aceptar_invitacion";
+			$http.post("ajax/ajax_sin_angular.php",datos).
+			success(function(response){
+				alertify.success('Ok');//REALIZAR LLAMADA AJAX!
+			});			
+		},
+		function(){
+			datos.funcion = "eliminar_invitacion";
+		}).setting('labels',{'ok':'Accept', 'cancel': 'Decline'});
+
+		console.log("ID INVITACION : " + id_invitacion);
 	}
 </script>    
 
