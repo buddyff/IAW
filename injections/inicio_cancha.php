@@ -1,11 +1,76 @@
 <?php 
     include ("navbar_cancha.php");
 ?>
-<div class="col-lg-4 col-lg-offset-4">
+<div class="col-lg-4 col-lg-offset-1">
+    <div class="text-center" id="resultados-por-cargar">RESULTADOS POR CARGAR</div>
+    <div class="row">
+        <div class="panel panel-success" id="panel-turnos-cargar" data-ng-show="ctrl.hay_turnos_por_cargar">
+            <div class="panel-heading text-center">
+                <h4 >{{ctrl.cargar_fecha}}</h4>
+            </div>
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                       <div class="row"><h4>Equipo 1</h4></div>
+                       <div class="row">{{ctrl.nombre_cargar_11}}</div>
+                       <div class="row">{{ctrl.nombre_cargar_12}}</div>
+                       <div class="row">{{ctrl.nombre_cargar_13}}</div>
+                       <div class="row">{{ctrl.nombre_cargar_14}}</div>
+                       <div class="row">{{ctrl.nombre_cargar_15}}</div> 
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <div class="row"><h4>Equipo 2</h4></div>
+                        <div class="row">{{ctrl.nombre_cargar_21}}</div>
+                        <div class="row">{{ctrl.nombre_cargar_22}}</div>
+                        <div class="row">{{ctrl.nombre_cargar_23}}</div>
+                        <div class="row">{{ctrl.nombre_cargar_24}}</div>
+                        <div class="row">{{ctrl.nombre_cargar_25}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3 text-center">
+                        <h3>Hora : {{ctrl.cargar_horario}}</h3>
+                    </div>
+                </div>
+              
+            </div>
+            
+            <div class="panel-footer text-center">
+               
+                    <div class="row">
+                        <div class="col-lg-6 text-center">Equipo 1</div>
+                        <div class="col-lg-6 text-center">Equipo 2</div> 
+                    </div> 
+                    <div class="row">
+                        <input class="col-lg-2 col-lg-offset-2 text-center" type="text" data-ng-model="ctrl.resultado_0"></input>
+                        <input class="col-lg-2 col-lg-offset-4 text-center" type="text" data-ng-model="ctrl.resultado_1"></input>
+                    </div>
+                 
+                <div class="row">
+                    <button class="btn btn-success" id="cargar-resultado" data-ng-click="ctrl.cargar_resultado()">CARGAR</button>
+                </div>                  
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4  col-lg-offset-4 text-center">
+        <div class="row">
+            <button type="button" class="btn btn-success" data-ng-click="ctrl.anterior_turno_cargar()">
+                <span aria-hidden="true">&laquo;</span>
+            </button>
+            <button type="button" class="btn btn-success" data-ng-click="ctrl.siguiente_turno_cargar()">
+                <span aria-hidden="true">&raquo;</span>
+             </button>
+         </div>
+    </div>
+</div>
+<div class="col-lg-4 col-lg-offset-2">
+    <div class="text-center" id="partido-actual">JUGÁNDOSE !!!</div>
     <div class="row">
         <div class="panel panel-success" id="panel-turno-jugandose">
             <div class="panel-heading text-center">
-                <h2>JUG&Aacute;NDOSE !</h2>
+                
+                <span class="fa fa-futbol-o fa-3x"></span>
+
             </div>
             <div class="panel-body" data-ng-show="ctrl.hay_turno">
                 
@@ -37,25 +102,7 @@
             <div class="panel-body" data-ng-show="!ctrl.hay_turno">
               <h4 class="text-center"> NO HAY NING&Uacute;N TURNO JUGANDOSE ACTUALMENTE</h4>              
             </div>
-          <!--   <div class="panel-footer text-center" data-ng-show="ctrl.hay_turno">
-               <div class="row"><h4>Resultado</h4></div>
-               
-               <div class="row">
-                    <div class="col-lg-4 text-center">
-                        <div class="row">Equipo 1</div> 
-                        <div class="row"><input type="radio"/></div>
-                    </div>
-                    <div class="col-lg-4 text-center">
-                        <div class="row">Empate</div> 
-                        <div class="row"><input type="radio"/></div>
-                    </div>
-                    <div class="col-lg-4 text-center">
-                        <div class="row">Equipo 2</div> 
-                        <div class="row"><input type="radio"/></div>
-                    </div>
-                </div>                    
-            </div>-->
+          
         </div>
     </div>
 </div>
-<

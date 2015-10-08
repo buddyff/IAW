@@ -289,11 +289,11 @@ function cuentaJugadorCtrl($http){
 
 function cuentaCanchaCtrl($http){
 	var scope=this;
-	scope.datos={};
-	scope.datos.funcion='get_turno_actual';
-	
+	datos={};
+	datos.funcion='get_turno_actual';
+	scope.hay_turnos_por_cargar=false;
 	//Obtengo la informacion del turno que se esta jugando ahora
-	$http.post("ajax/ajaxs.php",scope.datos)
+	$http.post("ajax/ajaxs.php",datos)
 	.success(function(response){
 		if(response.length>0){
 			scope.hay_turno=true;
@@ -313,6 +313,91 @@ function cuentaCanchaCtrl($http){
 			scope.hay_turno=false;
 	});
 	
+		
+	
+	//Obtengo los turnos que estan en estado finalizado (no tienen el resultado cargado)
+	scope.get_turnos_cargar=function(){
+		datos={};
+		datos.funcion="get_turnos_cargar";
+		$http.post("ajax/ajaxs.php",datos)
+		.success(function(response){
+			if(response.length>0){
+				scope.turnos_por_cargar=response;
+				scope.turno_cargar_actual=0;
+				scope.get_info_turno(scope.turnos_por_cargar[0]['id']);
+				scope.hay_turnos_por_cargar=true;
+			}
+		});
+	};
+	
+	
+	scope.get_turnos_cargar();
+	
+	scope.get_info_turno=function(id){
+		datos={};
+		datos.funcion="get_info_turno";
+		datos.turno=id;
+		$http.post ("ajax/ajaxs.php",datos)
+		.success(function(response){
+			if(response.length>0){
+				scope.id_cargar_11=response[0]['id'];
+				scope.id_cargar_12=response[1]['id'];
+				scope.id_cargar_13=response[2]['id'];
+				scope.id_cargar_14=response[3]['id'];
+				scope.id_cargar_15=response[4]['id'];
+				scope.id_cargar_21=response[5]['id'];
+				scope.id_cargar_22=response[6]['id'];
+				scope.id_cargar_23=response[7]['id'];
+				scope.id_cargar_24=response[8]['id'];
+				scope.id_cargar_25=response[9]['id'];
+				scope.nombre_cargar_11=response[0]['nombre'];
+				scope.nombre_cargar_12=response[1]['nombre'];
+				scope.nombre_cargar_13=response[2]['nombre'];
+				scope.nombre_cargar_14=response[3]['nombre'];
+				scope.nombre_cargar_15=response[4]['nombre'];
+				scope.nombre_cargar_21=response[5]['nombre'];
+				scope.nombre_cargar_22=response[6]['nombre'];
+				scope.nombre_cargar_23=response[7]['nombre'];
+				scope.nombre_cargar_24=response[8]['nombre'];
+				scope.nombre_cargar_25=response[9]['nombre'];
+				scope.cargar_horario=response[0]['horario'];
+				scope.cargar_fecha = response[0]['fecha'];
+			}
+		});
+	};
+	
+	scope.siguiente_turno_cargar=function(){
+		scope.turno_cargar_actual++;
+		if (scope.turno_cargar_actual >= (scope.turnos_por_cargar).length) scope.turno_cargar_actual=0;
+		scope.get_info_turno(scope.turnos_por_cargar[scope.turno_cargar_actual]['id']);
+	}; 
+	
+	scope.anterior_turno_cargar=function(){
+		if (scope.turno_cargar_actual == 0) 
+			scope.turno_cargar_actual=((scope.turnos_por_cargar).length)-1;
+		else
+			scope.turno_cargar_actual--;
+		scope.get_info_turno(scope.turnos_por_cargar[scope.turno_cargar_actual]['id']);
+	};
+	
+	
+	scope.cargar_resultado=function(){
+		datos={};
+		datos.funcion="cargar_resultado";
+		datos.id_turno=scope.turnos_por_cargar[scope.turno_cargar_actual]['id'];
+		datos.resultado_0=scope.resultado_0;
+		datos.resultado_1=scope.resultado_1;
+		$http.post ("ajax/ajaxs.php",datos)
+		.success(function(response){
+				//Actualizo el listado de los turnos que faltan cargar
+				scope.get_turnos_cargar();
+				
+				//Reseteo los campos
+				scope.resultado_0='';
+				scope.resultado_1='';
+		});
+		
+	};
 }
 
 

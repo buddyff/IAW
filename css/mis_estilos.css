@@ -55,6 +55,15 @@
    font-family: LaceNice;
 }
 
+#panel-turnos-cargar{
+   margin-top: 25x;
+   font-family: LaceNice;
+}
+
+#cargar-resultado{
+    margin-top:10px;
+}
+
  /*************************/
 /*     TABLA HISTORIAL   */
 /************************/
@@ -126,4 +135,15 @@
 
 .bootstrap-switch{
     height:35px;
+}
+
+
+/***********************************/
+/*          TITULOS               */
+/*********************************/
+
+#resultados-por-cargar, #partido-actual{
+     font-family: LaceNice;
+    font-size: 35px;
+    color:black;
 }
