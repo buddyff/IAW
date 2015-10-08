@@ -142,7 +142,7 @@
 /*          TITULOS               */
 /*********************************/
 
-#resultados-por-cargar, #partido-actual{
+#no-resultados-por-cargar,#resultados-por-cargar, #partido-actual{
      font-family: LaceNice;
     font-size: 35px;
     color:black;

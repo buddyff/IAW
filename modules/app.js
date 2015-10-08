@@ -327,6 +327,8 @@ function cuentaCanchaCtrl($http){
 				scope.get_info_turno(scope.turnos_por_cargar[0]['id']);
 				scope.hay_turnos_por_cargar=true;
 			}
+			else
+				scope.hay_turnos_por_cargar=false;
 		});
 	};
 	

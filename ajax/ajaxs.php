@@ -458,13 +458,15 @@ function cargar_resultado(){
             }
          }
           else{
-             $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=0";
-             $resultado=mysqli_query($db,$query);
-             while($fila = mysqli_fetch_assoc($resultado)){
-               $id_jugador= $fila['id_jugador'];
-               $query="UPDATE jugadores SET Puntaje=Puntaje+3 WHERE id={$id_jugador}";
-               mysqli_query($db,$query);
-            }
+             if ($empate){
+                 $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno}";
+                 $resultado=mysqli_query($db,$query);
+                 while($fila = mysqli_fetch_assoc($resultado)){
+                   $id_jugador= $fila['id_jugador'];
+                   $query="UPDATE jugadores SET Puntaje=Puntaje+1 WHERE id={$id_jugador}";
+                   mysqli_query($db,$query);
+                }
+             }
         }
         
        //Actualizo el estado del turno a CERRADO

@@ -1,9 +1,12 @@
 <?php 
     include ("navbar_cancha.php");
 ?>
-<div class="col-lg-4 col-lg-offset-1">
-    <div class="text-center" id="resultados-por-cargar">RESULTADOS POR CARGAR</div>
+
+<div class="col-lg-5">
+    <div class="text-center" id="resultados-por-cargar" data-ng-show="ctrl.hay_turnos_por_cargar">RESULTADOS POR CARGAR</div>
+    <div class="text-center" id="no-resultados-por-cargar" data-ng-show="!ctrl.hay_turnos_por_cargar">NO HAY RESULTADOS POR CARGAR</div>
     <div class="row">
+        <i class="fa fa-check-square-o fa-5x text-center col-lg-offset-4" data-ng-show="!ctrl.hay_turnos_por_cargar" style="font-size: 15em;margin-top:65px;"></i>
         <div class="panel panel-success" id="panel-turnos-cargar" data-ng-show="ctrl.hay_turnos_por_cargar">
             <div class="panel-heading text-center">
                 <h4 >{{ctrl.cargar_fecha}}</h4>
@@ -52,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4  col-lg-offset-4 text-center">
+    <div class="col-lg-4  col-lg-offset-4 text-center" data-ng-show="ctrl.hay_turnos_por_cargar">
         <div class="row">
             <button type="button" class="btn btn-success" data-ng-click="ctrl.anterior_turno_cargar()">
                 <span aria-hidden="true">&laquo;</span>
