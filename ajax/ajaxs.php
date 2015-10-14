@@ -257,14 +257,18 @@ function get_amigos(){
     $db = $GLOBALS['db'];    	
 	$res=array();
     
-    $query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo1 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
+    $query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
+    ON (a.id_amigo1 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR 
+        a.id_amigo2 = '{$_SESSION['user_id']}')";
     if($resultado = mysqli_query($db,$query)){
     	while($fila = mysqli_fetch_assoc($resultado)){
     		array_push($res,$fila);
     	}
     }
 	
-	$query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}')";
+	$query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
+    ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR 
+        a.id_amigo2 = '{$_SESSION['user_id']}')";
     if($resultado = mysqli_query($db,$query)){
     	while($fila = mysqli_fetch_assoc($resultado)){
     		array_push($res,$fila);
@@ -273,9 +277,34 @@ function get_amigos(){
      echo json_encode($res);
 }
 
+function get_jugadores(){
+    $db = $GLOBALS['db'];     
+    $data = $GLOBALS['data'];
+
+    $res=array();
+    
+    $query = "SELECT Id, Nombre, Apellido, Puntaje, Telefono, Edad, Email FROM jugadores WHERE Id != '{$_SESSION['user_id']}'";
+    if($resultado = mysqli_query($db,$query)){
+        while($fila = mysqli_fetch_assoc($resultado)){
+            $eh_amigo = false;
+            for ($i=0; $i < sizeof($data->amigos); $i++) {
+                $mis_amigos = ((array)$data->amigos[$i]);
+                //echo $mis_amigos['Id'];
+                if($mis_amigos['Id']==$fila['Id']){
+                    $eh_amigo = true;
+                    break;
+                }
+            }
+            if(!$eh_amigo)
+                array_push($res,$fila);
+        }
+    }
+    echo json_encode($res);
+}
+
 function ver_canchas(){
               
-    $data = $GLOBALS['data'];
+    //$data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
     
     $query = "SELECT * FROM canchas ORDER BY nombre ASC";
@@ -291,7 +320,7 @@ function ver_canchas(){
 
 function get_historial(){ 
     
-    $data = $GLOBALS['data'];
+    //$data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
     $res = array();
     
@@ -304,8 +333,7 @@ function get_historial(){
     	}
     }
     
-    echo json_encode($res);
-     
+    echo json_encode($res);     
 }
 
 function get_estadisticas(){
