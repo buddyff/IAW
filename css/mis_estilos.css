@@ -129,6 +129,10 @@
     color: white;
 }
 
+#crear-turno-modal{
+    top:20%;
+}
+
 /***********************************/
 /*          SWITCHS               */
 /*********************************/
@@ -143,7 +147,28 @@
 /*********************************/
 
 #no-resultados-por-cargar,#resultados-por-cargar, #partido-actual{
-     font-family: LaceNice;
+    font-family: LaceNice;
     font-size: 35px;
     color:black;
 }
+
+
+/***********************************/
+/*          BOTONES               */
+/*********************************/
+ #crear-turno-btn{
+     font-family: LaceNice;
+     margin-top: 0px;
+ }
+ 
+ .btn {
+     font-family: LaceNice;
+ }
+ 
+ /**********************************/
+/*         MENSAJES DE ERROR      */
+/*********************************/
+.help-block{
+    color:#d9534f;
+}
+

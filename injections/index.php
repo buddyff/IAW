@@ -11,21 +11,23 @@
                 Login
             </div>
              <div class="panel-body" >
-                <form id="formulario">
+                <form id="formulario" name="formulario">
                     <div class="form-group text-center">
                         <input type="checkbox" class="form-control" id="tipo-usuario"/>
                     </div>
                 	<div class="form-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input class="form-control text-center" type="text" placeholder="Ingresá tu email" data-ng-model="ctrl.datos.email" />
+                        <input class="form-control text-center" id="email" ng-required="true" name="email" type="email" placeholder="Ingresá tu email" data-ng-model="ctrl.datos.email"/>
+                        <p ng-show="formulario.email.$invalid  && !formulario.email.$pristine" class="help-block text-center">Ingresá un email válido</p>
                     </div>
                     <div class="form-group">
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>    
-                        <input class="form-control text-center" type="password" placeholder="Ingresa tu password" data-ng-model="ctrl.datos.pass"/>
+                        <input class="form-control text-center" id="pass" ng-required="true" name="pass" type="password" placeholder="Ingresa tu password" data-ng-model="ctrl.datos.pass"/>
+                        <p ng-show="formulario.pass.$invalid && !formulario.pass.$pristine" class="help-block text-center">Ingresá tu contraseña</p>
                     </div>
                     <div class="form-group">
-                        <button type"button" ng-click="ctrl.enviar_jugador()" class="btn btn-default col-lg-6 col-lg-offset-3 " id="ingresar-jugador-btn">Ingresar</button>
-                        <button type"button" ng-click="ctrl.enviar_cancha()" class="btn btn-default col-md-6 col-lg-offset-3 hidden" id="ingresar-cancha-btn">Ingresar</button>
+                        <button type"button" ng-click="ctrl.enviar_jugador()" ng-disabled="formulario.$invalid" class="btn btn-default col-lg-6 col-lg-offset-3 " id="ingresar-jugador-btn">Ingresar</button>
+                        <button type"button" ng-click="ctrl.enviar_cancha()" ng-disabled="formulario.$invalid" class="btn btn-default col-md-6 col-lg-offset-3 hidden" id="ingresar-cancha-btn">Ingresar</button>
                     </div>
                  </form>
 	            <div class="pull-right">
@@ -39,6 +41,8 @@
 
 <script>
     $(document).ready(function(){
+        
+         
         $("#tipo-usuario").bootstrapSwitch();
         $("#tipo-usuario").bootstrapSwitch('onText',"Cancha");
         $("#tipo-usuario").bootstrapSwitch('offText',"Jugador");
@@ -58,6 +62,9 @@
                 }
             }
        });
+     
+     
+   
                     
     });
 </script>

@@ -297,7 +297,7 @@ function get_historial(){
     
     //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
     $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
-            WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
+            WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Cerrado'";
      if($resultado = mysqli_query($db,$query)){
 		while($fila = mysqli_fetch_assoc($resultado)){
           array_push($res,$fila);
@@ -316,7 +316,7 @@ function get_estadisticas(){
     $perdidos=0;
     //Selecciono los turnos que el jugador se anoto y que se encuentran en estado "finalizado";
     $query="SELECT c.nombre,t.fecha,t.horario,tj.resultado FROM turnos_jugadores tj JOIN turnos t ON (tj.id_turno=t.id) JOIN canchas c ON(c.id=t.id_cancha)
-            WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Finalizado'";
+            WHERE tj.id_jugador={$_SESSION['user_id']} AND t.estado='Cerrado'";
     if($resultado = mysqli_query($db,$query)){
         while($fila = mysqli_fetch_assoc($resultado)){
             switch($fila['resultado']){
@@ -473,7 +473,20 @@ function cargar_resultado(){
        $query="UPDATE turnos SET estado='Cerrado' WHERE id={$id_turno}";
        mysqli_query($db,$query);
 }      
+
+
+function crear_turno(){
+    $data = $GLOBALS['data'];
+    $db = $GLOBALS['db'];
     
+    //Cambio el formato de la fecha para que sea compatible con el tipo date de mysql
+    $fecha = date('Y-m-d',strtotime($data->fecha));
+    
+    $query = "INSERT INTO turnos (id_cancha,resultado,fecha,horario,estado,inscriptos)
+                   VALUES ({$_SESSION['user_id']},null,'{$fecha}','{$data->hora}','Registrando',0)";
+    mysqli_query($db,$query);  
+    echo 1;            
+}    
     
 
 
