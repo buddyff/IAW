@@ -14,7 +14,7 @@ angular
 
 .controller("canchaCtrl", ['$http',canchaCtrl])
 
-.controller("amigosCtrl", ['$http',amigosCtrl])
+.controller("jugadoresCtrl", ['$http',jugadoresCtrl])
 
 .controller("historialCtrl", ['$http',historialCtrl])
 
@@ -50,10 +50,10 @@ angular
                 controllerAs: "ctrl",
                 templateUrl: "injections/historial.php"
             })
-            .when("/amigos", {
-                controller: "amigosCtrl",
+            .when("/jugadores", {
+                controller: "jugadoresCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/amigos.php"
+                templateUrl: "injections/jugadores.php"
             });
    });
    
@@ -452,35 +452,45 @@ function historialCtrl($http){
 	$http.post("ajax/ajaxs.php",scope.datos).
 		success(function(response){
 			if (response)
-				scope.estadisticas=response;
-			
+				scope.estadisticas=response;			
 		});
 		
 	
 	scope.datos2.funcion="get_historial";
 	
 	$http.post("ajax/ajaxs.php",scope.datos2).
-		success(function(response){
-			if (response){
-				scope.historial=response;
-			}
-			
-		});
-		
+	success(function(response){
+		if (response){
+			scope.historial=response;
+		}		
+	});	
 	
 }
 
-function amigosCtrl($http){
+function jugadoresCtrl($http){
 	var scope = this;
 	scope.datos={};
+	scope.datos2 = {};
 	scope.datos.funcion="get_amigos";
 	$http.post("ajax/ajaxs.php",scope.datos).
-		success(function(response){
-			if(response)
-				scope.amigos = response;
-			else
-			scope.amigos = "No tenes amigos papá!";
-		});	
+	success(function(response){
+		if(response){
+			console.log("El response es : " + scope.datos2.amigos);
+			scope.amigos = response;
+
+			scope.datos2.amigos = response;
+			scope.datos2.funcion="get_jugadores";		
+			$http.post("ajax/ajaxs.php",scope.datos2).
+			success(function(resp){
+				if(resp)
+					scope.jugadores = resp;
+				else
+					scope.jugadores = "No juega nadie!";
+			});	
+		}
+		else
+			scope.amigos = "No tenes amigos papá!";		
+	});		
 }
 
 

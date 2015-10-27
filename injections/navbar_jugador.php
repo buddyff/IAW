@@ -7,7 +7,7 @@
 			</div>
 			<ul	class="nav navbar-nav">
 				<li><a href="#/historial">HISTORIAL/ESTADISTICAS</a> </li>
-				<li><a href="#/amigos">AMIGOS</a> </li>
+				<li><a href="#/jugadores">Jugadores</a> </li>
 				<li><a href="#/cancha">VER CANCHAS</a></li>
 			</ul>
 			<ul class="pull-right nav navbar-nav >">
