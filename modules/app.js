@@ -95,6 +95,8 @@ function login($http){
     };
     
     
+
+
 }
 
 function sign_up($http){
@@ -444,9 +446,9 @@ function historialCtrl($http){
 
 function jugadoresCtrl($http){
 	var scope = this;
-	scope.datos={};
+	scope.datos = {};
 	scope.datos2 = {};
-	scope.datos.funcion="get_amigos";
+	scope.datos.funcion = "get_amigos";
 	$http.post("ajax/ajaxs.php",scope.datos).
 	success(function(response){
 		if(response){
@@ -465,8 +467,19 @@ function jugadoresCtrl($http){
 		}
 		else
 			scope.amigos = "No tenes amigos papá!";		
-	});		
+	});	
+
+	scope.agregarAmigo =function(id_jugador){
+		scope.datos = {};
+		scope.datos.funcion = "agregarAmigo";
+		scope.datos.id_jugador = id_jugador;
+		console.log(id_jugador);
+		$http.post("ajax/ajaxs.php",scope.datos).
+		success(function(response){
+			if(response)
+				location.reload();
+			else
+				console.log("no anduvo");
+		});
+	}	
 }
-
-
-

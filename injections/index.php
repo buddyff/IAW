@@ -11,6 +11,21 @@
                 Login
             </div>
              <div class="panel-body" >
+
+                    <!--<div class="jumbotron">
+                        <div class="container">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+
+                                <div ng-view></div>
+                            </div>
+                        </div>
+                    </div>-->
+
+
+
+
+
                 <form id="formulario">
                     <div class="form-group text-center">
                         <input type="checkbox" class="form-control" id="tipo-usuario"/>
