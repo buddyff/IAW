@@ -1,7 +1,7 @@
 <?php include ("navbar_jugador.php");?>
 
 <div class="row">
-    <div class="panel panel-primary col-lg-3 col panel-cancha" ng-repeat="c in ctrl.canchas">
+    <div class="panel col-lg-3 col panel-cancha" ng-repeat="c in ctrl.canchas">
     	<div class="panel-heading text-center">
     		{{c["nombre"]}}
     	</div>

@@ -1,7 +1,7 @@
 <?php include ("navbar_jugador.php");?>
 
 <div class="row">
-    <div class="panel panel-primary col-lg-3 col panel-cancha" ng-repeat="c in ctrl.amigos">
+    <div class="panel col-lg-3 col panel-cancha" ng-repeat="c in ctrl.amigos">
         <div class="panel-heading text-center">
             {{c["Nombre"]}}  {{c["Apellido"]}}
         </div>
@@ -17,8 +17,8 @@
             Mail:  {{c["Email"]}}
         </div>
     </div>
-    <div class="panel panel-success col-lg-3 col panel-cancha" ng-repeat="c in ctrl.jugadores">
-    	<div class="panel-heading text-center" style="background-image=">
+    <div class="panel col-lg-3 col panel-cancha" ng-repeat="c in ctrl.jugadores">
+    	<div class="panel-heading text-center">
     		{{c["Nombre"]}}  {{c["Apellido"]}}
     	</div>
     	<div class="panel-body">
@@ -35,7 +35,7 @@
                 <br>
                 </div>
                 <div class="col-lg-4">
-                    <i class="fa fa-user-plus fa-4x"></i>
+                    <button class="fa fa-user-plus fa-4x round-button" data-ng-click="ctrl.agregarAmigo(c['Id'])"></button>
                 </div>
             </div>
     	</div>

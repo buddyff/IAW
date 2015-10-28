@@ -1,7 +1,7 @@
 <?php include ("navbar_jugador.php");?>
 
 <div class="col-lg-6 col-lg-offset-1">
-    <div class="panel panel-success" id="panel-historial">
+    <div class="panel" id="panel-historial">
         <div class="panel-heading text-center" ><h2>HISTORIAL</h2></div>
         <div class="panel-body">
             <table class="table table-hover" id="tabla-historial">
@@ -25,7 +25,7 @@
 </div>
 
 <div class="col-lg-4">
-    <div class="panel panel-success" id="panel-historial">
+    <div class="panel" id="panel-estadisticas">
         <div class="panel-heading text-center" ><h2>ESTADÍSTICAS</h2></div>
         <div class="panel-body" >
             <div class="row text-center"  >
