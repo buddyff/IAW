@@ -385,7 +385,7 @@ function cuentaCanchaCtrl($http){
 	};
 	
 	
-	scope.cargar_resultado=function(){
+	scope.cargar_resultado=function(formulario){
 		datos={};
 		datos.funcion="cargar_resultado";
 		datos.id_turno=scope.turnos_por_cargar[scope.turno_cargar_actual]['id'];
@@ -393,17 +393,42 @@ function cuentaCanchaCtrl($http){
 		datos.resultado_1=scope.resultado_1;
 		$http.post ("ajax/ajaxs.php",datos)
 		.success(function(response){
-				//Actualizo el listado de los turnos que faltan cargar
-				scope.get_turnos_cargar();
-				
 				//Reseteo los campos
 				scope.resultado_0='';
 				scope.resultado_1='';
+				
+				formulario.$setPristine();
+				//Actualizo el listado de los turnos que faltan cargar
+				scope.get_turnos_cargar();
+														
+				
 		});
 		
 	};
+	
+	scope.reset=function(formulario){
+		scope.hora="";
+		scope.fecha="";
+		formulario.$setPristine();
+		$("#crear-turno-modal").modal("toggle");
+	};
+	
+	scope.crear_turno=function(formulario){
+		datos={};
+		datos.funcion="crear_turno";
+		datos.hora = scope.hora;
+		datos.fecha= scope.fecha;
+		$http.post ("ajax/ajaxs.php",datos)
+		.success(function(response){
+				$("#crear-turno-modal").modal("hide");
+				scope.hora="";
+				scope.fecha="";
+				formulario.$setPristine();
+				$("#turno-ok").modal("show");
+				
+		});
+	};
 }
-
 
 //----------------------------------------------------------------
 //--------------------Controlador cancha-------------------------
