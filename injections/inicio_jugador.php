@@ -1,6 +1,5 @@
 <?php 
-    
-	include ("navbar_jugador.php");
+   include ("navbar_jugador.php");
    include ("../Modales/invitar_amigos.php");
 ?>
 
@@ -64,8 +63,7 @@
             </div>
         </div>
     </div>
-</div>
-<div class="col-lg-4  col-lg-offset-6 text-center">
+<div class="col-lg-4  col-lg-offset-4 text-center">
     <div class="row">
         <button type="button" class="btn" ng-click="ctrl.anterior_turno()">
             <span aria-hidden="true">&laquo;</span>
@@ -75,4 +73,6 @@
          </button>
      </div>
 </div>
+</div>
+
 
