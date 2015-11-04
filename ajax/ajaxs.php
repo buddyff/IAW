@@ -55,8 +55,7 @@ function login_cancha(){
 }
 
 function logout(){
-    session_unset();
-    session_destroy();
+    $_SESSION['user_name']=null;
 }
 
 function anotarse_turno(){

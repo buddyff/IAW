@@ -1,6 +1,5 @@
 <?php 
-    
-	include ("navbar_jugador.php");
+   include ("navbar_jugador.php");
    include ("../Modales/invitar_amigos.php");
 ?>
 
@@ -26,7 +25,7 @@
 
 <div class="col-lg-4 col-lg-offset-2">
     <div class="row">
-        <div class="panel" id="panel-turnos" ng-show="ctrl.cant_turnos > 0">
+        <div class="panel" id="panel-turnos">
             <div class="panel-heading text-center">
                 <h2>TURNO</h2>
             </div>
@@ -63,11 +62,8 @@
                 </div>
             </div>
         </div>
-        <h1 ng-show="ctrl.cant_turnos == 0"> No hay turnos para registrarse ! </h1>
     </div>
-</div>
-
-<div class="col-lg-4  col-lg-offset-4 text-center" ng-show="ctrl.cant_turnos > 0">
+<div class="col-lg-4  col-lg-offset-4 text-center">
     <div class="row">
         <button type="button" class="btn" ng-click="ctrl.anterior_turno()">
             <span aria-hidden="true">&laquo;</span>
@@ -77,4 +73,6 @@
          </button>
      </div>
 </div>
+</div>
+
 

@@ -150,7 +150,6 @@ function cuentaJugadorCtrl($http){
 		for(i = 0 ; i < scope.cant_turnos ; i++){
 			scope.registrado[scope.turnos[i]["id_turno"]] = new Array();
 		}
-
 		if(scope.cant_turnos>0)
 			scope.status_turno();
 		
