@@ -1,6 +1,15 @@
 <?php
 
+$db = mysqli_connect("localhost", "root", NULL, "proyecto_iaw");
+
+/* verificar la conexión */
+if (mysqli_connect_errno()) {
+    printf("Conexión fallida: %s\n", mysqli_connect_error());
+    exit();
+}
 session_start();
+
+
 
 /***********************************/
 /*        CONEXION A LA DB         */
@@ -20,17 +29,10 @@ if(!mysql_select_db($nombre_db,$db)){
     exit;
 }
 */
-$db = mysqli_connect("localhost", "root", NULL, "proyecto_iaw");
 
-/* verificar la conexión */
-if (mysqli_connect_errno()) {
-    printf("Conexión fallida: %s\n", mysqli_connect_error());
-    exit();
-}
 
 
 //$_SESSION['user_name']=null;
-
 
 
 
