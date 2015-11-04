@@ -23,7 +23,7 @@ angular
             .when("/", {
                 controller: "loginCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/index.php"
+                templateUrl: "injections/login.php"
             })
             .when("/inicio_jugador", {
                 controller: "cuentaJugadorCtrl",
@@ -150,9 +150,9 @@ function cuentaJugadorCtrl($http){
 		for(i = 0 ; i < scope.cant_turnos ; i++){
 			scope.registrado[scope.turnos[i]["id_turno"]] = new Array();
 		}
-		
-		scope.status_turno();
-		
+
+		if(scope.cant_turnos > 0)
+			scope.status_turno();
 	});
 	
 	//Funcion para determinar del estado del turno para el usuario

@@ -11,17 +11,14 @@
 				<li><a href="#/cancha">VER CANCHAS</a></li>
 
 			</ul>
-			<ul style="size:100px;"></ul>
-			<ul class="nav navbar-nav >">
+			<ul class="nav navbar-nav pull-right">
 				<li>
-					<span id="notify" class="badge"></span>
-					<div class="btn-group">
+					<span id="notify" class="badge "></span>
+					<div class="btn-group boton-cerrar-sesion">
 				  		<button type="button" id="navbar-btn" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    		<?php echo strtoupper($_SESSION['user_name']); ?>
 					  	</button>
-					  	<ul class="dropdown-menu pull-left">
-					    	<li><a href="#/">Action</a></li>
-					    	<li role="separator" class="divider"></li>
+					  	<ul class="dropdown-menu ">
 					    	<li><a data-ng-controller="logoutCtrl as c" data-ng-click="c.logout()" href="#/">Cerrar Sesion</a></li>
 					  	</ul>
 					</div>
@@ -32,13 +29,7 @@
 <script>
 
     $(document).ready(function(){
-			//var intervalo = setInterval('f1()',1000);
-		var datos = {};
-		datos.funcion = "cantidad_invitaciones";
-		$.post("ajax/ajax_sin_angular.php",datos).
-		success(function(response){
-			$('#notify').html(response);
-		});	
+		var intervalo = setInterval('f1()',1000);		
 
 		datos.funcion = "mostrar_invitaciones";
 		$.post("ajax/ajax_sin_angular.php",datos).
@@ -56,14 +47,12 @@
 	});
 
 	function f1(){
-			
 		var datos = {};
 		datos.funcion = "cantidad_invitaciones";
-		$http.post("ajax/ajaxs.php",datos).
+		$.post("ajax/ajax_sin_angular.php",datos).
 		success(function(response){
 			$('#notify').html(response);
 		});	
-		
 	}
 
 	function aceptar_invitacion(id_invitacion,id_turno){
