@@ -33,7 +33,7 @@
 
     $(document).ready(function(){
 
-		var intervalo = setInterval('f1()',60000);		
+		var intervalo = setInterval('f1()',6000);		
 		var datos = {};
 
 		datos.funcion = "mostrar_invitaciones";
@@ -55,7 +55,7 @@
 			
 		var datos = {};
 		datos.funcion = "cantidad_invitaciones";
-		$http.post("ajax/ajaxs.php",datos).
+		$.post("ajax/ajax_sin_angular.php",datos).
 		success(function(response){
 			$('#notify').html(response);
 		});	
