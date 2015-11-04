@@ -255,25 +255,51 @@ function sign_up(){
 }
 
 function get_amigos(){
+    $data = $GLOBALS['data'];    
     $db = $GLOBALS['db'];    	
 	$res=array();
+	$incluir=null;
+    if(isset($data->incluir))
+         $incluir = $data->incluir;
     
-    $query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
-    ON (a.id_amigo1 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR 
-        a.id_amigo2 = '{$_SESSION['user_id']}')";
-    if($resultado = mysqli_query($db,$query)){
-    	while($fila = mysqli_fetch_assoc($resultado)){
-    		array_push($res,$fila);
-    	}
+        
+    
+    if($incluir!=null){
+        $query = "SELECT DISTINCT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
+        ON (a.id_amigo1 = j.id) WHERE (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}') ORDER BY j.puntaje DESC";
+        if($resultado = mysqli_query($db,$query)){
+            while($fila = mysqli_fetch_assoc($resultado)){
+                array_push($res,$fila);
+            }
+        }
+        
+        $query = "SELECT DISTINCT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
+        ON (a.id_amigo2 = j.id) WHERE (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}') ORDER BY puntaje DESC";
+        if($resultado = mysqli_query($db,$query)){
+            while($fila = mysqli_fetch_assoc($resultado)){
+                array_push($res,$fila);
+            }
+        }
     }
-	
-	$query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
-    ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR 
-        a.id_amigo2 = '{$_SESSION['user_id']}')";
-    if($resultado = mysqli_query($db,$query)){
-    	while($fila = mysqli_fetch_assoc($resultado)){
-    		array_push($res,$fila);
-    	}
+    
+    else{
+        $query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
+        ON (a.id_amigo1 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR 
+            a.id_amigo2 = '{$_SESSION['user_id']}') ORDER BY puntaje DESC";
+        if($resultado = mysqli_query($db,$query)){
+        	while($fila = mysqli_fetch_assoc($resultado)){
+        		array_push($res,$fila);
+        	}
+        }
+    	
+    	$query = "SELECT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
+        ON (a.id_amigo2 = j.id) WHERE j.Nombre != '{$_SESSION['user_name']}' AND (a.id_amigo1 = '{$_SESSION['user_id']}' OR 
+            a.id_amigo2 = '{$_SESSION['user_id']}') ORDER BY puntaje DESC";
+        if($resultado = mysqli_query($db,$query)){
+        	while($fila = mysqli_fetch_assoc($resultado)){
+        		array_push($res,$fila);
+        	}
+        }
     }
      echo json_encode($res);
 }

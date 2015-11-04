@@ -101,15 +101,32 @@ color: #111111;
 }
 
  /*************************/
+/*     TABLA PUNTAJES    */
+/************************/
+#tabla-puntajes{
+  display: -moz-stack;
+  max-height: 430px;
+  overflow-y: auto;
+  font-family: WalterTurncoat;
+  font-size: 15px;
+  
+}
+
+#panel-puntajes {
+  font-family: WalterTurncoat;
+  font-size: 15px;
+  margin-top: 35px;
+}
+ /*************************/
 /*     TABLA HISTORIAL   */
 /************************/
-#tabla_historial{
+#tabla-historial{
   display: -moz-stack;
   max-height: 250px;
   overflow-y: scroll;
   font-family: WalterTurncoat;
   font-size: 15px;
-  color: #a11234;
+    
 }
 
 #panel-historial {
