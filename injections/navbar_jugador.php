@@ -29,8 +29,8 @@
 <script>
 
     $(document).ready(function(){
-		var intervalo = setInterval('f1()',1000);		
-
+		var intervalo = setInterval('f1()',60000);		
+		var datos = {};
 		datos.funcion = "mostrar_invitaciones";
 		$.post("ajax/ajax_sin_angular.php",datos).
 		success(function(response){
