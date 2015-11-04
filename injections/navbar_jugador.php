@@ -11,17 +11,14 @@
 				<li><a href="#/cancha">VER CANCHAS</a></li>
 
 			</ul>
-			<ul style="size:100px;"></ul>
-			<ul class="nav navbar-nav >">
+			<ul class="nav navbar-nav pull-right">
 				<li>
 					<span id="notify" class="badge"></span>
-					<div class="btn-group">
-				  		<button type="button" id="navbar-btn" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<div class="btn-group boton-cerrar-sesion">
+				  		<button type="button" id="navbar-btn" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    		<?php echo strtoupper($_SESSION['user_name']); ?>
 					  	</button>
-					  	<ul class="dropdown-menu pull-left">
-					    	<li><a href="#/">Action</a></li>
-					    	<li role="separator" class="divider"></li>
+					  	<ul class="dropdown-menu">
 					    	<li><a data-ng-controller="logoutCtrl as c" data-ng-click="c.logout()" href="#/">Cerrar Sesion</a></li>
 					  	</ul>
 					</div>
@@ -33,7 +30,7 @@
 
     $(document).ready(function(){
 
-		var intervalo = setInterval('f1()',6000);		
+		var intervalo = setInterval('f1()',60000);		
 		var datos = {};
 
 		datos.funcion = "mostrar_invitaciones";
