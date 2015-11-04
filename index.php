@@ -9,6 +9,6 @@ include ("config.php");
             
           <div class="container-fluid" ng-view > 
           </div>        
-           <?php include ("injections/footer.php");?>
+           
    </body>    
 </html>

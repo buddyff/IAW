@@ -1,9 +1,30 @@
 <?php 
+    
 	include ("navbar_jugador.php");
-	include ("../Modales/invitar_amigos.php");
+   include ("../Modales/invitar_amigos.php");
 ?>
 
-<div class="col-lg-4 col-lg-offset-4">
+<div class="col-lg-3 col-lg-offset-1">
+    <div class="panel" id="panel-puntajes">
+        <div class="panel-heading text-center" ><h2>PUNTAJES</h2></div>
+        <div class="panel-body">
+            <table class="table table-hover" id="tabla-puntajes">
+                <thead>
+                    <tr>
+                       <th class="text-center"><h3>Amigo</h3></th>
+                       <th class="text-center"><h3>Puntos</h3></th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="c in ctrl.puntajes">
+                    <th class="text-center"><h4>{{c["Nombre"]}}</h4></th>
+                    <th class="text-center"><h4>{{c["Puntaje"]}}</h4></th>
+                </tbody>
+            </table>
+         </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-lg-offset-2">
     <div class="row">
         <div class="panel" id="panel-turnos">
             <div class="panel-heading text-center">
@@ -44,7 +65,7 @@
         </div>
     </div>
 </div>
-<div class="col-lg-4  col-lg-offset-4 text-center">
+<div class="col-lg-4  col-lg-offset-6 text-center">
     <div class="row">
         <button type="button" class="btn" ng-click="ctrl.anterior_turno()">
             <span aria-hidden="true">&laquo;</span>

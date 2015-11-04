@@ -23,7 +23,7 @@ angular
             .when("/", {
                 controller: "loginCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/index.php"
+                templateUrl: "injections/login.php"
             })
             .when("/inicio_jugador", {
                 controller: "cuentaJugadorCtrl",
@@ -150,9 +150,23 @@ function cuentaJugadorCtrl($http){
 		for(i = 0 ; i < scope.cant_turnos ; i++){
 			scope.registrado[scope.turnos[i]["id_turno"]] = new Array();
 		}
+		if(scope.cant_turnos>0)
+			scope.status_turno();
 		
-		scope.status_turno();
-		
+	});
+	
+	//Recupero a los amigos y sus puntajes
+	scope.datos2={};
+	scope.datos2.funcion='get_amigos';
+	scope.datos2.incluir = true;
+	$http.post("ajax/ajaxs.php",scope.datos2)
+	.success(function(response){
+				
+			    scope.puntajes = response.sort(function(a, b) {
+			        return (b['Puntaje'] > a['Puntaje']) ? 1 : ((b['Puntaje'] < a['Puntaje']) ? -1 : 0);
+			    });
+			    
+				//scope.puntajes=response;
 	});
 	
 	//Funcion para determinar del estado del turno para el usuario

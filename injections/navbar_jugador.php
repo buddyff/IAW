@@ -1,4 +1,4 @@
-<?php include("../config.php"); ?>
+<?php include("../config.php");?>
 
    <div class="row">
         <nav class="navbar navbar-inverse" id="navbar-ppal-jugador" >
