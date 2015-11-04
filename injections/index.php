@@ -10,7 +10,7 @@
             <div class="panel-heading text-center">
                 Login
             </div>
-             <div class="panel-body" >
+             <div class="panel-body">
                 <form id="formulario" name="formulario">
                     <div class="form-group text-center">
                         <input type="checkbox" class="form-control" id="tipo-usuario"/>

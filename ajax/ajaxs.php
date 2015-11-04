@@ -302,6 +302,16 @@ function get_jugadores(){
     echo json_encode($res);
 }
 
+function agregarAmigo(){
+    $db = $GLOBALS['db'];
+    $data = $GLOBALS['data'];
+
+    $query = "INSERT INTO amigos (id_amigo1,id_amigo2) VALUES ('{$_SESSION['user_id']}','{$data->id_jugador}')";
+    if($resultado = mysqli_query($db,$query)){
+        echo "agregado!";
+    }
+}
+
 function ver_canchas(){
               
     //$data = $GLOBALS['data'];
@@ -392,8 +402,7 @@ function get_turno_actual(){
           array_push($res,$fila);
         }
         echo json_encode($res);
-     }
-    
+     }    
 }
 
 //Devuelve todo los turnos que encuentran en estado Finalizado

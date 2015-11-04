@@ -3,28 +3,29 @@
    <div class="row">
         <nav class="navbar navbar-inverse" id="navbar-ppal-jugador" >
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#/inicio_jugador">FULBITO</a>
+				<a class="navbar-brand" href="#/inicio_jugador">Fulbito App</a>
 			</div>
 			<ul	class="nav navbar-nav">
-				<li><a href="#/historial">HISTORIAL/ESTADISTICAS</a> </li>
+    			<li><a href="#/historial">HISTORIAL/ESTADISTICAS</a> </li>
 				<li><a href="#/jugadores">AMIGOS</a> </li>
 				<li><a href="#/cancha">VER CANCHAS</a></li>
+
 			</ul>
-			<ul class="pull-right nav navbar-nav >">
+			<ul style="size:100px;"></ul>
+			<ul class="nav navbar-nav >">
 				<li>
+					<span id="notify" class="badge"></span>
 					<div class="btn-group">
-					  <button type="button"  id="navbar-btn" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					     <?php echo strtoupper($_SESSION['user_name']); ?><span id="notify" class="badge"></span>
-					  </button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Action</a></li>
-					    <li role="separator" class="divider"></li>
-					    <li><a data-ng-controller="logoutCtrl as c" data-ng-click="c.logout()" >Cerrar Sesion</a></li>
-					  </ul>
+				  		<button type="button" id="navbar-btn" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    		<?php echo strtoupper($_SESSION['user_name']); ?>
+					  	</button>
+					  	<ul class="dropdown-menu pull-left">
+					    	<li><a href="#/">Action</a></li>
+					    	<li role="separator" class="divider"></li>
+					    	<li><a data-ng-controller="logoutCtrl as c" data-ng-click="c.logout()" href="#/">Cerrar Sesion</a></li>
+					  	</ul>
 					</div>
-					
-					 </li>
-					 <p id="p"></p>	
+				</li>
 			</ul>
         </nav>
     </div>
