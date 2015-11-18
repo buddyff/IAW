@@ -28,7 +28,7 @@ angular
             .when("/inicio_jugador", {
                 controller: "cuentaJugadorCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/inicio_jugador.php"
+                templateUrl: "injections/inicio_jugador.php"                
             })
             .when("/inicio_cancha", {
                 controller: "cuentaCanchaCtrl",
@@ -38,7 +38,7 @@ angular
             .when("/registro", {
                 controller: "registroCtrl",
                 controllerAs: "ctrl",
-                templateUrl: "injections/registro.html"
+                templateUrl: "injections/registro.php"
             })
             .when("/cancha", {
                 controller: "canchaCtrl",
@@ -60,17 +60,15 @@ angular
 function login($http){
 	var scope=this;
 	scope.datos={};
-	scope.nombre;
-   
+	   
 	scope.enviar_jugador = function(){
-	  
 	  scope.datos.funcion="login_jugador";
       $http.post("ajax/ajaxs.php", scope.datos)
       .success(function(res){
-          console.log(scope.nombre);
-          if(res){
-          	location.href="#/inicio_jugador";
-          	
+           
+           if(res){
+           	location.href="#/inicio_jugador";
+           	
           }
           else{
           	$("#login_incorrecto").modal('toggle');
@@ -106,8 +104,8 @@ function sign_up($http){
 	scope.sign_up = function(){
           $http.post("ajax/ajaxs.php", scope.datos)
           .success(function(res){
-              if(res)
-              	location.href="#/mi_cuenta";
+              if(res==1)
+              	location.href="#/inicio_jugador";
               else
               	alert ("Error");
             });         
@@ -132,7 +130,7 @@ function logoutCtrl($http){
 function cuentaJugadorCtrl($http){
 	var scope=this;
 	scope.datos={};
-	
+	$("#navbar-ppal-jugador").load("injections/navbar_jugador.php");
 	scope.datos.funcion="get_turnos";
 	//scope.disponibilidad;
 	scope.registrado = new Array();
@@ -304,6 +302,7 @@ function cuentaJugadorCtrl($http){
 //----------------------------------------------------------------------------
 
 function cuentaCanchaCtrl($http){
+	$("#navbar-ppal-cancha").load("injections/navbar_cancha.php");
 	var scope=this;
 	datos={};
 	datos.funcion='get_turno_actual';

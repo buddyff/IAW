@@ -1,8 +1,10 @@
 <?php include ("navbar_jugador.php");?>
 
 <div class="col-lg-6 col-lg-offset-1">
-    <div class="panel" id="panel-historial">
-        <div class="panel-heading text-center" ><h2>HISTORIAL</h2></div>
+    <div class="panel panel-default" id="panel-historial">
+        <div class="panel-heading text-center" >
+            <span class="fa fa-history fa-3x"></span>
+        </div>
         <div class="panel-body">
             <table class="table table-hover" id="tabla-historial">
                 <thead>
@@ -24,17 +26,18 @@
     </div>
 </div>
 
-<div class="col-lg-4">
-    <div class="panel" id="panel-estadisticas">
-        <div class="panel-heading text-center" ><h2>ESTADÍSTICAS</h2></div>
+<div class="col-lg-4" style="margin-top: 100px">
+    <div class="panel panel-default" id="panel-estadisticas">
+        <div class="panel-heading text-center" >
+            <span class="fa fa-bar-chart fa-3x"></span>
+        </div>
         <div class="panel-body" >
             <div class="row text-center"  >
                 <h4>Jugados: {{ctrl.historial.length}}</h4>
                 <h4>Ganados: {{ctrl.estadisticas[0]['Ganados']}}</h4>
                 <h4>Empatados: {{ctrl.estadisticas[0]['Empatados']}}</h4>
                 <h4>Perdidos: {{ctrl.estadisticas[0]['Perdidos']}}</h4>
-                <h4>Efectividad: </h4>
-            </div>
+           </div>
          </div>
     </div>
 </div>

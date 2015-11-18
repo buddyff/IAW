@@ -1,21 +1,31 @@
 <?php 
-   include ("navbar_jugador.php");
+   require ("navbar_jugador.php");
    include ("../Modales/invitar_amigos.php");
 ?>
 
-<div class="col-lg-3 col-lg-offset-1">
-    <div class="panel" id="panel-puntajes">
-        <div class="panel-heading text-center" ><h2>PUNTAJES</h2></div>
+<div class="col-lg-4 col-lg-offset-1">
+    <div class="panel panel-default" id="panel-puntajes">
+        <div class="panel-heading text-center" >
+            <span class="fa fa-table fa-3x"></span>
+        </div>
         <div class="panel-body">
             <table class="table table-hover" id="tabla-puntajes">
                 <thead>
                     <tr>
                        <th class="text-center"><h3>Amigo</h3></th>
+                       <th class="text-center"><h3>PJ</h3></th>
+                       <th class="text-center"><h3>PG</h3></th>
+                       <th class="text-center"><h3>PE</h3></th>
+                       <th class="text-center"><h3>PP</h3></th>
                        <th class="text-center"><h3>Puntos</h3></th>
                     </tr>
                 </thead>
                 <tbody ng-repeat="c in ctrl.puntajes">
                     <th class="text-center"><h4>{{c["Nombre"]}}</h4></th>
+                    <th class="text-center"><h4>{{c["Pj"]}}</h4></th>
+                    <th class="text-center"><h4>{{c["Pg"]}}</h4></th>
+                    <th class="text-center"><h4>{{c["Pe"]}}</h4></th>
+                    <th class="text-center"><h4>{{c["Pp"]}}</h4></th>
                     <th class="text-center"><h4>{{c["Puntaje"]}}</h4></th>
                 </tbody>
             </table>
@@ -25,9 +35,9 @@
 
 <div class="col-lg-4 col-lg-offset-2">
     <div class="row" ng-show="ctrl.cant_turnos > 0">
-        <div class="panel" id="panel-turnos">
+        <div class="panel panel-default" id="panel-turnos">
             <div class="panel-heading text-center">
-                <h2>TURNO</h2>
+                <span class="fa fa-sign-in fa-3x"></span>
             </div>
             <div class="panel-body">
                 <input hidden type="text"></input>
@@ -48,17 +58,17 @@
             </div>
             <div class="panel-footer text-center">
                 <div ng-show="ctrl.disponibilidad=='disponible'">
-                     <button class="btn"  ng-click="ctrl.registrar()">REGISTRAR</button>
+                     <button class="btn btn-default"  ng-click="ctrl.registrar()">REGISTRAR</button>
                 </div>
                 <div ng-show="ctrl.disponibilidad=='lleno'">
                      <button class="btn" disabled>LLENO</button>
                 </div>
                 <div ng-show="ctrl.disponibilidad=='registrado'">
-                     <button class="btn" ng-click="ctrl.salir()">SALIR</button>
+                     <button class="btn btn-default" ng-click="ctrl.salir()">SALIR</button>
                 </div>
                 <br>
                 <div>
-                	<button class="btn " ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
+                	<button class="btn btn-default" ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
                 </div>
             </div>
         </div>

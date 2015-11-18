@@ -18,12 +18,12 @@
                 	<div class="form-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                         <input class="form-control text-center" id="email" ng-required="true" name="email" type="email" placeholder="Ingresá tu email" data-ng-model="ctrl.datos.email"/>
-                        <p ng-show="formulario.email.$invalid  && !formulario.email.$pristine" class="help-block text-center">Ingresá un email válido</p>
+                        <p ng-show="formulario.email.$invalid  && !formulario.email.$pristine" class="help-block text-center" style="color:#FFFFFF">Ingresá un email válido</p>
                     </div>
                     <div class="form-group">
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>    
                         <input class="form-control text-center" id="pass" ng-required="true" name="pass" type="password" placeholder="Ingresa tu password" data-ng-model="ctrl.datos.pass"/>
-                        <p ng-show="formulario.pass.$invalid && !formulario.pass.$pristine" class="help-block text-center">Ingresá tu contraseña</p>
+                        <p ng-show="formulario.pass.$invalid && !formulario.pass.$pristine" class="help-block text-center" style="color:#FFFFFF">Ingresá tu contraseña</p>
                     </div>
                     <div class="form-group">
                         <button type"button" ng-click="ctrl.enviar_jugador()" ng-disabled="formulario.$invalid" class="btn btn-default col-lg-6 col-lg-offset-3 " id="ingresar-jugador-btn">Ingresar</button>

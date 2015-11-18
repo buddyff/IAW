@@ -241,12 +241,12 @@ function sign_up(){
     
     $query = "INSERT INTO jugadores (Nombre,Apellido,Telefono,Direccion,Edad,Email,Pass) VALUES ('{$nombre}','{$apellido}','{$telefono}','{$direccion}','{$edad}','{$email}','{$password}')";
     
-    $resultado = mysql_query($query, $db);
+    $resultado = mysqli_query($db,$query);
     
     
     if($resultado){
-        $_SESSION["user_name"]= $resultado['Nombre'];
-        $_SESSION["user_id"]= $resultado['Id'];
+        $_SESSION["user_name"]= $nombre;
+        //$_SESSION["user_id"]= $resultado['Id'];
         echo 1;
     }
     else
@@ -264,7 +264,7 @@ function get_amigos(){
         
     
     if($incluir!=null){
-        $query = "SELECT DISTINCT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
+        $query = "SELECT DISTINCT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email,Pj,Pg,Pe,Pp FROM jugadores j JOIN amigos a 
         ON (a.id_amigo1 = j.id) WHERE (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}') ORDER BY j.puntaje DESC";
         if($resultado = mysqli_query($db,$query)){
             while($fila = mysqli_fetch_assoc($resultado)){
@@ -272,7 +272,7 @@ function get_amigos(){
             }
         }
         
-        $query = "SELECT DISTINCT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email FROM jugadores j JOIN amigos a 
+        $query = "SELECT DISTINCT j.Id,Nombre, Apellido, Puntaje, Direccion, Telefono, Edad, Email,Pj,Pg,Pe,Pp FROM jugadores j JOIN amigos a 
         ON (a.id_amigo2 = j.id) WHERE (a.id_amigo1 = '{$_SESSION['user_id']}' OR a.id_amigo2 = '{$_SESSION['user_id']}') ORDER BY puntaje DESC";
         if($resultado = mysqli_query($db,$query)){
             while($fila = mysqli_fetch_assoc($resultado)){
@@ -502,21 +502,41 @@ function cargar_resultado(){
      
      //Actualizo los puntajes de los jugadores
      if($gano_0){
+         //Actualizo los puntos del equipo ganador
          $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=0";
          $resultado=mysqli_query($db,$query);
          while($fila = mysqli_fetch_assoc($resultado)){
            $id_jugador= $fila['id_jugador'];
-           $query="UPDATE jugadores SET Puntaje=Puntaje+3 WHERE id={$id_jugador}";
+           $query="UPDATE jugadores SET Puntaje=Puntaje+3,Pj=Pj+1,Pg=Pg+1 WHERE id={$id_jugador}";
+           mysqli_query($db,$query);
+         }      
+         //Actualizo los puntos del equipo perdedor
+         $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=1";
+         $resultado=mysqli_query($db,$query);
+         while($fila = mysqli_fetch_assoc($resultado)){
+           $id_jugador= $fila['id_jugador'];
+           $query="UPDATE jugadores SET Pj=Pj+1,Pp=Pp+1 WHERE id={$id_jugador}";
            mysqli_query($db,$query);
         }
      }
+     
      else
          if($gano_1){
-              $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=1";
+             //Actualizo los puntos del equipo ganador
+             $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=1";
              $resultado=mysqli_query($db,$query);
              while($fila = mysqli_fetch_assoc($resultado)){
                $id_jugador= $fila['id_jugador'];
-               $query="UPDATE jugadores SET Puntaje=Puntaje+3 WHERE id={$id_jugador}";
+               $query="UPDATE jugadores SET Puntaje=Puntaje+3,Pj=Pj+1,Pg=Pg+1 WHERE id={$id_jugador}";
+               mysqli_query($db,$query);
+            }
+            
+            //Actualizo los puntos del equipo perdedor
+             $query="SELECT id_jugador FROM turnos_jugadores WHERE id_turno={$id_turno} AND equipo=0";
+             $resultado=mysqli_query($db,$query);
+             while($fila = mysqli_fetch_assoc($resultado)){
+               $id_jugador= $fila['id_jugador'];
+               $query="UPDATE jugadores SET Pj=Pj+1,Pp=Pp+1 WHERE id={$id_jugador}";
                mysqli_query($db,$query);
             }
          }
@@ -526,7 +546,7 @@ function cargar_resultado(){
                  $resultado=mysqli_query($db,$query);
                  while($fila = mysqli_fetch_assoc($resultado)){
                    $id_jugador= $fila['id_jugador'];
-                   $query="UPDATE jugadores SET Puntaje=Puntaje+1 WHERE id={$id_jugador}";
+                   $query="UPDATE jugadores SET Puntaje=Puntaje+1,Pj=Pj+1,Pe=Pe+1 WHERE id={$id_jugador}";
                    mysqli_query($db,$query);
                 }
              }

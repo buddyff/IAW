@@ -1,7 +1,7 @@
 <?php include("../config.php");?>
 
-   <div class="row">
-        <nav class="navbar navbar-inverse" id="navbar-ppal-jugador" >
+   <div id="navbar-ppal-jugador">
+        <nav class="navbar navbar-inverse">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#/inicio_jugador">Fulbito App</a>
 			</div>
@@ -15,8 +15,9 @@
 				<li>
 					<span id="notify" class="badge"></span>
 					<div class="btn-group boton-cerrar-sesion">
-				  		<button type="button" id="navbar-btn" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  		<button type="button" id="navbar-btn" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    		<?php echo strtoupper($_SESSION['user_name']); ?>
+				    		
 					  	</button>
 					  	<ul class="dropdown-menu">
 					    	<li><a data-ng-controller="logoutCtrl as c" data-ng-click="c.logout()" href="#/">Cerrar Sesion</a></li>

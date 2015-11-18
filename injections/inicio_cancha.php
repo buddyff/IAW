@@ -4,12 +4,12 @@
     include ("../Modales/turno_creado.php");
 ?>
 <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-5 col-lg-offset-1">
         <div class="text-center" id="resultados-por-cargar" data-ng-show="ctrl.hay_turnos_por_cargar">RESULTADOS POR CARGAR</div>
         <div class="text-center" id="no-resultados-por-cargar" data-ng-show="!ctrl.hay_turnos_por_cargar">NO HAY RESULTADOS POR CARGAR</div>
         <div class="row">
             <i class="fa fa-check-square-o fa-5x text-center col-lg-offset-4" data-ng-show="!ctrl.hay_turnos_por_cargar" style="font-size: 15em;margin-top:65px;"></i>
-            <div class="panel panel-success" id="panel-turnos-cargar" data-ng-show="ctrl.hay_turnos_por_cargar">
+            <div class="panel panel-default" id="panel-turnos-cargar" data-ng-show="ctrl.hay_turnos_por_cargar">
                 <div class="panel-heading text-center">
                     <h4 >{{ctrl.cargar_fecha}}</h4>
                 </div>
@@ -60,26 +60,26 @@
                         </div>
                      
                     <div class="row">
-                        <button class="btn btn-success" id="cargar-resultado" ng-disabled="formulario_2.$invalid" data-ng-click="ctrl.cargar_resultado(formulario_2)">CARGAR</button>
+                        <button class="btn btn-default" id="cargar-resultado" ng-disabled="formulario_2.$invalid" data-ng-click="ctrl.cargar_resultado(formulario_2)">CARGAR</button>
                     </div>                  
                 </div>
             </div>
         </div>
         <div class="col-lg-4  col-lg-offset-4 text-center" data-ng-show="ctrl.hay_turnos_por_cargar">
             <div class="row">
-                <button type="button" class="btn btn-success" data-ng-click="ctrl.anterior_turno_cargar()">
+                <button type="button" class="btn btn-default" data-ng-click="ctrl.anterior_turno_cargar()">
                     <span aria-hidden="true">&laquo;</span>
                 </button>
-                <button type="button" class="btn btn-success" data-ng-click="ctrl.siguiente_turno_cargar()">
+                <button type="button" class="btn btn-default" data-ng-click="ctrl.siguiente_turno_cargar()">
                     <span aria-hidden="true">&raquo;</span>
                  </button>
              </div>
         </div>
     </div>
-    <div class="col-lg-4 col-lg-offset-2">
+    <div class="col-lg-4 col-lg-offset-1">
         <div class="text-center" id="partido-actual">JUGÁNDOSE !!!</div>
         <div class="row">
-            <div class="panel panel-success" id="panel-turno-jugandose">
+            <div class="panel panel-default" id="panel-turno-jugandose">
                 <div class="panel-heading text-center">
                     
                     <span class="fa fa-futbol-o fa-3x"></span>
@@ -122,10 +122,10 @@
 </div>    
 
 <div class="row col-lg-12 text-center" ng-show="ctrl.hay_turnos_por_cargar">
-    <button class="btn btn-warning btn-lg" id="crear-turno-btn" onclick="display_modal()">Crear Turno</button>
+    <button class="btn btn-default btn-lg" id="crear-turno-btn" onclick="display_modal()">Crear Turno</button>
 </div>
 <div class="row col-lg-12 text-center" ng-show="!ctrl.hay_turnos_por_cargar" style="margin-top:150px">
-    <button class="btn btn-warning btn-lg" id="crear-turno-btn" onclick="display_modal()">Crear Turno</button>
+    <button class="btn btn-default btn-lg" id="crear-turno-btn" onclick="display_modal()">Crear Turno</button>
 </div>
 
 
