@@ -43,7 +43,7 @@
 			for (var i = invitaciones.length - 1; i >= 0; i--) {
 				//var params = invitaciones[i]["nombre_cancha"]+","+invitaciones[i]['id_invitacion']+","+invitaciones[i]['dia']+","+invitaciones[i]['hora'];
 				 alertify.notify(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " <a href=javascript:aceptar_invitacion("+invitaciones[i]['id_invitacion']+","+invitaciones[i]['id_turno']+")>te invito a jugar</a>  en " + invitaciones[i]["nombre_cancha"]
-				 +" el dia " +invitaciones[i]['dia']+" a las "+invitaciones[i]['hora']	, 'custom', 30);
+				 +" el dia " +invitaciones[i]['dia']+" a las "+invitaciones[i]['hora']	, 'custom', 10);
 				//alertify.log(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " te invito a '<a href=javascript:aceptar_invitacion("+invitaciones[i]['id_invitacion']+")>Jugar</a>'  en " + invitaciones[i]["nombre_cancha"]);
 			};
 		});			
@@ -80,19 +80,22 @@
 			  type: 	"post",
 			  dataType: "json",
 			  data: 	datos,
-			  success: 	function(response){
-							alertify.success('Confirmaste que jugas, no nos dejes con uno menos ;)');//REALIZAR LLAMADA AJAX!
-						}	
+			  done: 	alertify.success('Confirmaste que jugas, no nos dejes con uno menos ;)')//REALIZAR LLAMADA AJAX!
+							
 			});	
 		},
 		function(){
 			console.log("Rechaze invitacion");
-			datos.funcion = "eliminar_invitacion";
-			datos.id_invitacion = id_invitacion;
-			datos.id_turno = id_turno;
-			$http.post("ajax/ajax_sin_angular.php",datos).
-			success(function(response){
-				alertify.success("Rechazaste la invitacion :/");
+
+			datos= {'funcion' : 'eliminar_invitacion',
+					'id_invitacion': id_invitacion,
+					'id_turno': id_turno};		
+			$.ajax({
+			  url: 		"ajax/ajax_sin_angular.php",
+			  type: 	"post",
+			  dataType: "json",
+			  data: 	datos,
+			  success: 	alertify.error("Rechazaste la invitacion :/")
 			});
 		}).setting('labels',{'ok':'Aceptar', 'cancel': 'Rechazar'});
 
