@@ -227,9 +227,7 @@ function cuentaJugadorCtrl($http){
 		//Hago la peticion Ajax pasansole el Id del turno al cual quiero anotarme
 		$http.post("ajax/ajaxs.php",scope.datos)
 		.success(function(response){
-			if (response){							
-				scope.status_turno();
-			}
+			scope.status_turno();
 		});
 	};
 	
