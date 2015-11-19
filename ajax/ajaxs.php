@@ -126,22 +126,26 @@ function get_turnos(){
 function status_turno(){
     $data = $GLOBALS['data'];
     $db = $GLOBALS['db'];
+    $res=array();
     
     //Verifico si existe el registro turno-jugador
     $query="SELECT * FROM turnos_jugadores WHERE id_turno={$data->id_turno} AND id_jugador={$_SESSION['user_id']}";
     if($resultado = mysqli_query($db,$query)){
         if($fila = mysqli_fetch_row($resultado))
-            echo 1;
-        else{
-            $query="SELECT inscriptos FROM turnos WHERE id={$data->id_turno}";
-            $resultado=mysqli_query($db,$query);
-            $resultado=mysqli_fetch_assoc($resultado);
-            if($resultado['inscriptos']==10)
-                   echo 2;  
-            else
-                echo 3;
-        }
+            array_push($res,1); //registrado
+        else
+            array_push($res,0); //no registrado
+        
+        $query="SELECT inscriptos FROM turnos WHERE id={$data->id_turno}";
+        $resultado=mysqli_query($db,$query);
+        $resultado=mysqli_fetch_assoc($resultado);
+        if($resultado['inscriptos']==10)
+           array_push($res,1); //lleno 
+        else
+            array_push($res,0); //no lleno
+        
     }
+    echo json_encode($res);
 }
 
 function is_registered(){

@@ -29,8 +29,8 @@ function mostrar_invitaciones(){
     if($resultado = mysqli_query($db,$query)){
         while($fila = mysqli_fetch_assoc($resultado)){
             array_push($res,$fila);
-            $query = "UPDATE invitaciones SET estado = 'no_vista' WHERE id = '{$fila['id_invitacion']}' ";
-            mysqli_query($db,$query);
+            //$query = "UPDATE invitaciones SET estado = 'no_vista' WHERE id = '{$fila['id_invitacion']}' ";
+            //mysqli_query($db,$query);
         }
     }
 

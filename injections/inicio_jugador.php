@@ -68,7 +68,7 @@
                 </div>
                 <br>
                 <div>
-                	<button class="btn btn-default" ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
+                	<button class="btn btn-default" ng-show="!ctrl.lleno" ng-click="ctrl.invitar_amigos()">Invita un amigo</button>
                 </div>
             </div>
         </div>
@@ -83,7 +83,10 @@
              </button>
          </div>
     </div>
-    <h1 ng-show="ctrl.cant_turnos == 0"> No hay turnos para registrarse ! </h1>
+    
 </div>
-
+<div class="col-lg-6 col-lg-offset-1" ng-show="ctrl.cant_turnos == 0">
+        <div id="no-turnos-registrarse"> No hay turnos para registrarse ! </div>
+        <i class="fa fa-thumbs-o-down fa-5x text-center col-lg-offset-3" data-ng-show="!ctrl.hay_turnos_por_cargar" style="font-size: 15em;margin-top:65px;"></i>
+    </div>
 

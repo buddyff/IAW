@@ -43,7 +43,7 @@
 			for (var i = invitaciones.length - 1; i >= 0; i--) {
 				//var params = invitaciones[i]["nombre_cancha"]+","+invitaciones[i]['id_invitacion']+","+invitaciones[i]['dia']+","+invitaciones[i]['hora'];
 				 alertify.notify(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " <a href=javascript:aceptar_invitacion("+invitaciones[i]['id_invitacion']+","+invitaciones[i]['id_turno']+")>te invito a jugar</a>  en " + invitaciones[i]["nombre_cancha"]
-				 +" el dia " +invitaciones[i]['dia']+" a las "+invitaciones[i]['hora']	, 'custom', 10);
+				 +" el dia " +invitaciones[i]['dia']+" a las "+invitaciones[i]['hora']	, 'custom', 10000);
 				//alertify.log(invitaciones[i]["nombre_jugador"] + " " + invitaciones[i]["apellido_jugador"] + " te invito a '<a href=javascript:aceptar_invitacion("+invitaciones[i]['id_invitacion']+")>Jugar</a>'  en " + invitaciones[i]["nombre_cancha"]);
 			};
 		});			

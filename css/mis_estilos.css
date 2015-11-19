@@ -212,6 +212,13 @@ color: #111111;
     color:black;
 }
 
+#no-turnos-registrarse{
+    font-family: LaceNice;
+    font-size: 35px;
+    color:black;
+    margin-top: 150px;
+}
+
 
 /***********************************/
 /*          BOTONES               */

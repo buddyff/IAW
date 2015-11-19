@@ -175,17 +175,23 @@ function cuentaJugadorCtrl($http){
 		scope.datos.id_turno=scope.turnos[scope.turno_actual]["id_turno"];
 		$http.post("ajax/ajaxs.php",scope.datos)
 		.success(function(response){
-			if(response==1){
+			if(response[0]==1){
 				 scope.disponibilidad='registrado';
 				 
 			}
 			else{
-				 if (response==2)
+				 if (response[1]==1)
 					scope.disponibilidad = 'lleno';
 				else
 				 	scope.disponibilidad='disponible';
 				 
 			}
+			
+			if(response[1]==1)
+				scope.lleno = true;
+			else
+				scope.lleno = false;
+			
 		});
 		
 	};		
